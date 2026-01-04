@@ -1,4 +1,4 @@
-import Bottom from "./Rightoption/bottom";
+import Bottom from "./Rightoption/Bottom";
 import Medium from "./Rightoption/Medium";
 import Top from "./Rightoption/Top";
 
