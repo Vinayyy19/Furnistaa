@@ -4,7 +4,7 @@ import Logout from "./Leftoptions/Logout";
 import OrderHis from "./Leftoptions/OrderHis";
 import Return from "./Leftoptions/Return";
 import Setting from "./Leftoptions/Setting";
-import Profile from "./profile";
+import Profile from "./Profile";
 
 const Leftbox = () => {
   return (
