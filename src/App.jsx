@@ -52,9 +52,9 @@ const App = () => {
           </Route>
 
           {/* ADMIN PROTECTED */}
-          <Route element={<AdminProtectedRoute />}>
+          {/* <Route element={<AdminProtectedRoute />}> */}
             <Route path="/admin/*" element={<Admin />} />
-          </Route>
+          {/* </Route> */}
 
           {/* AUTH */}
           <Route path="/login" element={<Login />} />
