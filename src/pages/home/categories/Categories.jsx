@@ -2,18 +2,25 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Circle from "./Circle";
 import api from "../../../../api/axios"
+import { toast } from "react-toastify";
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchCategories = async () => {
+ useEffect(() => {
+  const fetchCategories = async () => {
+    try {
       const res = await api.get("/product/getCategories");
       setCategories(res.data.categories);
-    };
-    fetchCategories();
-  }, []);
+    } catch (error) {
+      toast.error("Server is not running. Please contact the owner.");
+    }
+  };
+
+  fetchCategories();
+}, []);
+
 
   return (
     <div>
