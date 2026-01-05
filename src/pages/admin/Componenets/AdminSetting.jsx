@@ -15,7 +15,7 @@ const AdminSetting = () => {
     lastName: "",
     email: "",
     password: "",
-    role: "Sales Man",
+    role: "salesMan",
   });
 
   const getAdmin = async () => {
