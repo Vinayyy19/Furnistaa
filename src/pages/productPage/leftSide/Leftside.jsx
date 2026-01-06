@@ -2,48 +2,85 @@ import { useEffect, useState } from "react";
 import Productcard from "./Productcard";
 import api from "../../../../api/axios";
 
-const Leftside = ({ selectedCat, selectedMat, minPrice, maxPrice }) => {
+const LIMIT = 12;
+
+const Leftside = ({ selectedCat, query, sort }) => {
   const [products, setProducts] = useState([]);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (!selectedCat) return;
+    setProducts([]);
+    setPage(1);
+    setHasMore(true);
+  }, [selectedCat, query, sort]);
 
-    const params = new URLSearchParams();
-
-    if (selectedMat) params.append("material", selectedMat);
-    if (minPrice) params.append("minPrice", minPrice);
-    if (maxPrice) params.append("maxPrice", maxPrice);
-
-    const url = `/product/category/${selectedCat}?${params.toString()}`;
-
+  useEffect(() => {
     const fetchProducts = async () => {
+      if (!hasMore || loading) return;
+
+      setLoading(true);
+
       try {
+        const params = new URLSearchParams();
+        params.append("page", page);
+        params.append("limit", LIMIT);
+
+        if (sort) params.append("sort", sort);
+        if (query) params.append("q", query);
+
+        const url = query
+          ? `/product/search?${params.toString()}`
+          : `/product/category/${selectedCat}?${params.toString()}`;
+
         const res = await api.get(url);
-        setProducts(res.data.products || []);
+
+        const newProducts = res.data.products || [];
+        const pagination = res.data.pagination;
+
+        setProducts(prev =>
+          page === 1 ? newProducts : [...prev, ...newProducts]
+        );
+
+        if (pagination.page >= pagination.totalPages) {
+          setHasMore(false);
+        }
       } catch (err) {
         console.error("Fetch products failed", err);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchProducts();
-  }, [selectedCat, selectedMat, minPrice, maxPrice]);
+  }, [page, selectedCat, query, sort, hasMore, loading]);
 
   return (
-    <div>
-      <h1 className="text-3xl px-4 text-white font-bold">
-        Products
-      </h1>
-
-      <p className="text-gray-400 px-4 mb-5">
-        Showing {products.length} products
+    <>
+      <p className="text-gray-400 mb-4">
+        {products.length>0?`Showing ${products.length} products`:"No product Available"}
       </p>
 
-      <div className="flex flex-wrap justify-evenly gap-6">
-        {products.map((product) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {products.map(product => (
           <Productcard key={product._id} product={product} />
         ))}
       </div>
-    </div>
+
+      {/* LOAD MORE */}
+      {hasMore && (
+        <div className="flex justify-center mt-10">
+          <button
+            onClick={() => setPage(p => p + 1)}
+            disabled={loading}
+            className="px-6 py-3 rounded-xl cursor-pointer bg-orange-500 text-white font-medium hover:bg-orange-600 disabled:opacity-60"
+          >
+            {loading ? "Loading..." : "Load More"}
+          </button>
+        </div>
+      )}
+    </>
   );
 };
 

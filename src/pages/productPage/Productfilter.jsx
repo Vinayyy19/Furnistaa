@@ -9,123 +9,129 @@ const Productfilter = () => {
   const [searchParams] = useSearchParams();
 
   const [categories, setCategories] = useState([]);
-
-  const [Categoryopen, setCategoryopen] = useState(true);
-  const [priceOpen, setpriceOpen] = useState(false);
-  const [Materialopen, setMaterialopen] = useState(false);
+  const [open, setOpen] = useState({
+    category: true,
+    price: false,
+    material: false,
+  });
 
   const selectedMat = searchParams.get("material") || "";
   const minPrice = searchParams.get("minPrice") || "";
   const maxPrice = searchParams.get("maxPrice") || "";
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      const res = await api.get("/product/getCategories");
+    api.get("/product/getCategories").then((res) => {
       setCategories(res.data.categories);
-    };
-    fetchCategories();
+    });
   }, []);
 
   const updateQuery = (key, value) => {
     const params = new URLSearchParams(searchParams);
-
-    if (value) {
-      params.set(key, value);
-    } else {
-      params.delete(key);
-    }
-
+    value ? params.set(key, value) : params.delete(key);
     navigate(`?${params.toString()}`, { replace: true });
   };
 
   return (
-    <div className="bg-primary-dark rounded-2xl p-4 w-full">
-      <h1 className="font-bold text-2xl">Filters</h1>
-      <p className="text-gray-500 mb-4">Refine Your Search</p>
-      <hr />
+    <div className="sticky top-24 bg-[#111] border border-neutral-800 rounded-2xl p-5">
+      <h2 className="text-xl font-semibold text-white mb-1">Filters</h2>
+      <p className="text-sm text-gray-400 mb-4">Refine your search</p>
 
       {/* CATEGORY */}
-      <div className="p-4">
-        <div className="flex justify-between items-center">
-          <h2 className="font-semibold">Category</h2>
-          <ChevronDown
-            onClick={() => setCategoryopen(!Categoryopen)}
-            className={`cursor-pointer transition ${
-              Categoryopen ? "rotate-180" : ""
-            }`}
-          />
+      <div className="py-4 border-b border-neutral-800">
+        <div
+          className="flex justify-between items-center cursor-pointer"
+          onClick={() => setOpen((o) => ({ ...o, category: !o.category }))}
+        >
+          <h3 className="font-medium text-white">Category</h3>
+          <ChevronDown className={open.category ? "rotate-180" : ""} />
         </div>
 
-        {Categoryopen &&
-          categories.map((cat) => (
-            <label key={cat._id} className="flex gap-2 mt-2 cursor-pointer">
-              <input
-                type="radio"
-                name="category"
-                checked={categoryId === cat._id}
-                onChange={() =>
-                  navigate(`/category/${cat._id}`)
-                }
-              />
-              <span>{cat.name}</span>
-            </label>
-          ))}
+        {open.category && (
+          <div className="mt-3 space-y-2">
+            {categories.map((cat) => (
+              <label
+                key={cat._id}
+                className="flex items-center gap-3 text-sm text-gray-300 cursor-pointer"
+              >
+                <input
+                  type="radio"
+                  checked={categoryId === cat._id}
+                  onChange={() => navigate(`/category/${cat._id}`)}
+                />
+                {cat.name}
+              </label>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* PRICE */}
-      <div className="p-4">
-        <div className="flex justify-between items-center">
-          <h2 className="font-semibold">Price</h2>
-          <ChevronDown
-            onClick={() => setpriceOpen(!priceOpen)}
-            className={`cursor-pointer transition ${
-              priceOpen ? "rotate-180" : ""
-            }`}
-          />
+      {/* PRICE */}
+      <div className="py-4 border-b border-neutral-800">
+        <div
+          className="flex justify-between items-center cursor-pointer"
+          onClick={() => setOpen((o) => ({ ...o, price: !o.price }))}
+        >
+          <h3 className="font-medium text-white">Price</h3>
+          <ChevronDown className={open.price ? "rotate-180" : ""} />
         </div>
 
-        {priceOpen && (
-          <div className="flex flex-col gap-2 mt-2">
+        {open.price && (
+          <div className="mt-3 flex flex-col gap-3">
             <input
               type="number"
-              placeholder="Min Price"
+              min={0}
+              placeholder="Min"
               value={minPrice}
-              onChange={(e) => updateQuery("minPrice", e.target.value)}
+              onChange={(e) => {
+                const value = Math.max(0, Number(e.target.value));
+                updateQuery("minPrice", value);
+              }}
+              className="bg-[#1a1a1a] border border-neutral-700 px-3 py-2 rounded-lg text-sm text-white"
             />
+
             <input
               type="number"
-              placeholder="Max Price"
+              min={0}
+              placeholder="Max"
               value={maxPrice}
-              onChange={(e) => updateQuery("maxPrice", e.target.value)}
+              onChange={(e) => {
+                const value = Math.max(0, Number(e.target.value));
+                updateQuery("maxPrice", value);
+              }}
+              className="bg-[#1a1a1a] border border-neutral-700 px-3 py-2 rounded-lg text-sm text-white"
             />
           </div>
         )}
       </div>
 
       {/* MATERIAL */}
-      <div className="p-4">
-        <div className="flex justify-between items-center">
-          <h2 className="font-semibold">Material</h2>
-          <ChevronDown
-            onClick={() => setMaterialopen(!Materialopen)}
-            className={`cursor-pointer transition ${
-              Materialopen ? "rotate-180" : ""
-            }`}
-          />
+      <div className="py-4">
+        <div
+          className="flex justify-between items-center cursor-pointer"
+          onClick={() => setOpen((o) => ({ ...o, material: !o.material }))}
+        >
+          <h3 className="font-medium text-white">Material</h3>
+          <ChevronDown className={open.material ? "rotate-180" : ""} />
         </div>
 
-        {Materialopen &&
-          ["Wood", "Metal", "Plastic"].map((mat) => (
-            <label key={mat} className="flex gap-2 mt-2 cursor-pointer">
-              <input
-                type="radio"
-                name="material"
-                checked={selectedMat === mat}
-                onChange={() => updateQuery("material", mat)}
-              />
-              <span>{mat}</span>
-            </label>
-          ))}
+        {open.material && (
+          <div className="mt-3 space-y-2">
+            {["Wood", "Metal", "Plastic"].map((mat) => (
+              <label
+                key={mat}
+                className="flex items-center gap-3 text-sm text-gray-300 cursor-pointer"
+              >
+                <input
+                  type="radio"
+                  checked={selectedMat === mat}
+                  onChange={() => updateQuery("material", mat)}
+                />
+                {mat}
+              </label>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

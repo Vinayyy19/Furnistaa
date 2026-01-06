@@ -9,8 +9,8 @@ const Searchbar = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!query.trim()) return;
-    // console.log(query.trim());
-    // navigate(`/search?q=${encodeURIComponent(query.trim())}`);
+    navigate(`/search?q=${encodeURIComponent(query.trim())}`);
+    setQuery("");
   };
 
   return (
