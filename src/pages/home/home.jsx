@@ -1,6 +1,7 @@
 import Categories from "./categories/Categories"
 import Hero from "./hero/Hero"
 import Card from "./cards/Card"
+import Reviews from "./Review"
 
 const home = () => {
   return (
@@ -8,6 +9,7 @@ const home = () => {
       <Hero />
       <Categories />
       <Card />
+      <Reviews />
     </div>
   )
 }
