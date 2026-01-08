@@ -36,7 +36,6 @@ const Productfilter = () => {
       <h2 className="text-xl font-semibold text-white mb-1">Filters</h2>
       <p className="text-sm text-gray-400 mb-4">Refine your search</p>
 
-      {/* CATEGORY */}
       <div className="py-4 border-b border-neutral-800">
         <div
           className="flex justify-between items-center cursor-pointer"
@@ -65,8 +64,6 @@ const Productfilter = () => {
         )}
       </div>
 
-      {/* PRICE */}
-      {/* PRICE */}
       <div className="py-4 border-b border-neutral-800">
         <div
           className="flex justify-between items-center cursor-pointer"
@@ -105,7 +102,6 @@ const Productfilter = () => {
         )}
       </div>
 
-      {/* MATERIAL */}
       <div className="py-4">
         <div
           className="flex justify-between items-center cursor-pointer"

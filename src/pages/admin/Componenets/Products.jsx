@@ -13,7 +13,6 @@ const Products = () => {
 
   return (
     <div>
-      {/* Background */}
       <div className={isAnyModalOpen ? "blur-sm" : ""}>
         <Head
           onAddCategory={() => setShowAddCategory(true)}

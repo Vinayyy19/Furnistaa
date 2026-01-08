@@ -43,7 +43,6 @@ const Productcard = ({ product }) => {
                  cursor-pointer transition
                  md:hover:-translate-y-1 md:hover:shadow-xl"
     >
-      {/* IMAGE */}
       <div className="h-44 sm:h-48 md:h-52 overflow-hidden">
         <img
           src={imageUrl}
@@ -52,7 +51,6 @@ const Productcard = ({ product }) => {
         />
       </div>
 
-      {/* CONTENT */}
       <div className="p-4">
         <h3 className="text-white font-semibold truncate">
           {product.name}
@@ -62,7 +60,6 @@ const Productcard = ({ product }) => {
           {product.description}
         </p>
 
-        {/* PRICE + ACTION */}
         <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <span className="text-lg font-bold text-orange-500">
             {price ? `₹${price}` : "—"}

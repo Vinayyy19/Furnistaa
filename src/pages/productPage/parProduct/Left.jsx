@@ -22,7 +22,6 @@ const Left = ({ primaryImg, setPrimaryImg, images = [] }) => {
 
   return (
     <div>
-      {/* Main Image */}
       <div
         className="w-full h-[420px] rounded-xl overflow-hidden cursor-zoom-in"
         onMouseMove={handleMove}
@@ -35,7 +34,6 @@ const Left = ({ primaryImg, setPrimaryImg, images = [] }) => {
         }}
       />
 
-      {/* Thumbnails */}
       <div className="mt-4 flex gap-3 overflow-x-auto whitespace-nowrap hide-scrollbar">
         {images.map((img, index) => {
           const imgUrl = img.url;

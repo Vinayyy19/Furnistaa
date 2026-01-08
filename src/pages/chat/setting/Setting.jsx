@@ -5,7 +5,6 @@ import api from "../../../../api/axios";
 import { toast } from "react-toastify";
 import LoadingBox from "../../../Loading/LoadingBox";
 
-/* ---------- SAFE INITIAL STATE ---------- */
 const EMPTY_STATE = {
   firstName: "",
   lastName: "",
@@ -24,7 +23,6 @@ const Setting = () => {
   const [editedData, setEditedData] = useState(EMPTY_STATE);
   const [originalData, setOriginalData] = useState(EMPTY_STATE);
 
-  /* ---------- LOAD USER ---------- */
   useEffect(() => {
     if (!user) {
       api
@@ -34,7 +32,6 @@ const Setting = () => {
     }
   }, [user, setUser]);
 
-  /* ---------- SYNC LOCAL STATE ---------- */
   useEffect(() => {
     if (!user) return;
 
@@ -84,7 +81,6 @@ const Setting = () => {
       return;
     }
 
-    /* ---------- PINCODE → POSTALCODE ---------- */
     const payload = { ...changedFields };
     if (payload.pinCode !== undefined) {
       payload.postalCode = payload.pinCode;
@@ -124,7 +120,6 @@ const Setting = () => {
           </div>
         </div>
 
-        {/* ---------- PERSONAL INFO ---------- */}
         <div className="border border-neutral-400 rounded-lg">
           <div className="flex items-center justify-between p-4">
             <div className="flex items-center gap-2 text-white text-2xl font-semibold">
@@ -217,7 +212,6 @@ const Setting = () => {
           </div>
         )}
 
-        {/* ---------- ADDRESS ---------- */}
         <div className="border border-neutral-400 rounded-lg">
           <div className="flex items-center justify-between p-4">
             <div className="flex items-center gap-2 text-white text-2xl font-semibold">

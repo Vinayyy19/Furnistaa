@@ -15,7 +15,6 @@ const Product = () => {
   return (
     <div className="min-h-screen px-4 md:px-6 py-6">
       
-      {/* HEADER */}
       <div className="mb-6">
         <h1 className="text-2xl md:text-3xl font-bold text-white">
           Explore Products
@@ -25,7 +24,6 @@ const Product = () => {
         </p>
       </div>
 
-      {/* SORT + FILTER BUTTON */}
       <div className="flex justify-between items-center mb-6">
         <button
           onClick={() => setShowFilter(true)}
@@ -46,15 +44,12 @@ const Product = () => {
         </select>
       </div>
 
-      {/* MAIN LAYOUT */}
       <div className="flex gap-8 items-start">
         
-        {/* SIDEBAR (Desktop only) */}
         <aside className="hidden md:block w-[280px] shrink-0">
           <Productfilter />
         </aside>
 
-        {/* PRODUCTS */}
         <section className="flex-1">
           <Leftside
             selectedCat={categoryId}
@@ -64,7 +59,6 @@ const Product = () => {
         </section>
       </div>
 
-      {/* MOBILE FILTER DRAWER */}
       {showFilter && (
         <div className="fixed inset-0 bg-black/60 z-50 md:hidden">
           <div className="absolute left-0 top-0 h-full w-[85%] bg-[#111] p-4 overflow-y-auto">

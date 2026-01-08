@@ -11,29 +11,24 @@ const ResultCard = ({ product }) => {
     <>
       <div className="grid grid-cols-[70px_2fr_1.5fr_1.5fr_1fr] items-center px-6 py-4 border-b border-neutral-800 text-sm">
         
-        {/* Image */}
         <img  
           src={primaryImage}
           alt={product.name}
           className="w-12 h-12 rounded-xl object-cover bg-neutral-800"
         />
 
-        {/* Name */}
         <span className="text-white font-medium">
           {product.name}
         </span>
 
-        {/* Category */}
         <span className="text-neutral-400">
           {product.categoryId?.name || "—"}
         </span>
 
-        {/* Material */}
         <span className="text-neutral-400">
           {product.material}
         </span>
 
-        {/* Action */}
         <button
           onClick={() => setShowVariant(true)}
           className="w-fit px-4 py-2 rounded-lg bg-neutral-800 text-neutral-200 hover:bg-indigo-600 hover:text-white transition"

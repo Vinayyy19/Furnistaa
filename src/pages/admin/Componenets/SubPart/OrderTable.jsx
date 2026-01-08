@@ -60,7 +60,6 @@ const OrderTable = ({ orders = [], refreshOrders }) => {
                     key={order._id}
                     className="border-b last:border-b-0 hover:bg-neutral-50 transition"
                   >
-                    {/* ORDER */}
                     <td className="px-6 py-5">
                       <p className="font-semibold text-gray-900">
                         #{order._id.slice(-6).toUpperCase()}
@@ -70,7 +69,6 @@ const OrderTable = ({ orders = [], refreshOrders }) => {
                       </p>
                     </td>
 
-                    {/* CUSTOMER */}
                     <td className="px-6 py-5">
                       <p className="font-medium text-gray-900">
                         {order.userId?.name?.firstName}{" "}
@@ -80,13 +78,10 @@ const OrderTable = ({ orders = [], refreshOrders }) => {
                         {order.userId?.email}
                       </p>
                     </td>
-
-                    {/* TOTAL */}
                     <td className="px-6 py-5 text-right font-semibold text-gray-900">
                       ₹{order.pricing.finalAmount}
                     </td>
 
-                    {/* STATUS */}
                     <td className="px-6 py-5 text-center">
                       <span
                         className={`inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full ring-1 ${statusColors[order.currentStatus]}`}
@@ -95,7 +90,6 @@ const OrderTable = ({ orders = [], refreshOrders }) => {
                       </span>
                     </td>
 
-                    {/* UPDATE */}
                     <td className="px-6 py-5 text-center">
                       {updatingId === order._id ? (
                         <div className="flex justify-center">
@@ -136,7 +130,6 @@ const OrderTable = ({ orders = [], refreshOrders }) => {
         </table>
       </div>
 
-      {/* CONFIRM MODAL */}
       {pendingChange && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
           <div className="bg-white rounded-xl p-6 w-[360px]">

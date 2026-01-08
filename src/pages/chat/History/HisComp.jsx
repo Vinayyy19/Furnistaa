@@ -31,12 +31,10 @@ const HisComp = ({ order }) => {
 
   return (
     <div className="bg-white border border-neutral-200 rounded-xl overflow-hidden transition-shadow hover:shadow-sm">
-      {/* HEADER */}
       <div
         className="px-6 py-5 cursor-pointer select-none"
         onClick={() => setOpen((prev) => !prev)}
       >
-        {/* TOP */}
         <div className="flex justify-between items-start gap-6">
           <div className="space-y-1">
             <span
@@ -70,7 +68,6 @@ const HisComp = ({ order }) => {
           </div>
         </div>
 
-        {/* META */}
         <div className="mt-4 flex justify-between items-center text-sm text-gray-600">
           <p>
             Delivering to{" "}
@@ -86,14 +83,12 @@ const HisComp = ({ order }) => {
         </div>
       </div>
 
-      {/* EXPANDED */}
       <div
         className={`transition-all duration-300 ease-in-out overflow-hidden ${
           open ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="px-6 py-5 border-t space-y-5 bg-gray-50">
-          {/* ITEMS */}
           <div className="space-y-4">
             {order.items.map((item, idx) => (
               <div key={idx} className="flex justify-between text-sm">
@@ -113,7 +108,6 @@ const HisComp = ({ order }) => {
             ))}
           </div>
 
-          {/* PRICE */}
           <div className="border-t pt-4 text-sm space-y-1 text-gray-600">
             <div className="flex justify-between">
               <span>Items total</span>
@@ -131,7 +125,6 @@ const HisComp = ({ order }) => {
             </div>
           </div>
 
-          {/* ACTIVITY */}
           <div className="border-t pt-4 space-y-3">
             <p className="text-sm font-semibold text-gray-900">
               Order activity

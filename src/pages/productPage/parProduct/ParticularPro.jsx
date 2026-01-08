@@ -31,7 +31,6 @@ const ParticularPro = () => {
   return (
     <div>
       <div className="flex flex-col lg:flex-row">
-        {/* Image Section */}
         <div className="w-full lg:w-2/4 rounded-2xl p-4">
           <Left
             primaryImg={primaryImg}
@@ -40,7 +39,6 @@ const ParticularPro = () => {
           />
         </div>
 
-        {/* Description Section */}
         <div className="w-full lg:w-2/4 p-4">
           <Right product={product} variants={product.variants} />
         </div>

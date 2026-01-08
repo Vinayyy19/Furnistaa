@@ -34,13 +34,11 @@ const AddVariantModal = ({ productId, onClose }) => {
 
   return (
     <>
-      {/* Backdrop */}
       <div
         onClick={onClose}
         className="fixed inset-0 bg-black/70 backdrop-blur-sm z-40"
       />
 
-      {/* Modal */}
       <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
         <form
           onSubmit={submitVariant}
@@ -83,7 +81,6 @@ const AddVariantModal = ({ productId, onClose }) => {
             ))}
           </div>
 
-          {/* Actions */}
           <div className="flex justify-end gap-4 mt-8">
             <button
               type="button"

@@ -86,7 +86,6 @@ const Reviews = () => {
             variants={cardVariants}
             className="relative bg-gray-100 rounded-3xl p-8 shadow-lg flex flex-col justify-between"
           >
-            {/* Quote icon */}
             <span className="absolute top-6 left-6 text-6xl text-gray-400 leading-none">“</span>
 
             <p className="text-gray-900 text-lg leading-relaxed mt-8 mb-8">

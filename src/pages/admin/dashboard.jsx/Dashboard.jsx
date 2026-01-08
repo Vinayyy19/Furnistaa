@@ -40,14 +40,12 @@ const Dashboard = () => {
 
   return (
     <div className="p-6 space-y-8 min-h-screen">
-      {/* HEADER */}
       <div>
         <h1 className="text-2xl font-bold text-white">Admin Dashboard</h1>
         <p className="text-neutral-400 text-sm">
           Store performance & analytics overview
         </p>
       </div>
-      {/* KPI CARDS */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
         <StatCard label="Today's Orders" value={stats.todayOrders} />
         <StatCard label="This Month Orders" value={stats.thisMonthOrders} />
@@ -56,7 +54,6 @@ const Dashboard = () => {
         <StatCard label="Today's Users" value={stats.todayUsers} />
         <StatCard label="This Month Users" value={stats.thisMonthUsers} />
       </div>
-      {/* CHARTS */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <ChartWrapper title="Orders by Status">
           <OrdersStatusChart data={ordersByStatus} />
@@ -66,7 +63,6 @@ const Dashboard = () => {
           <MonthlyOrdersChart data={monthlyComparison} />
         </ChartWrapper>
       </div>
-      {/* TOP CATEGORIES */}
       <ChartWrapper title="Top Categories by Orders">
         <TopCategoriesChart data={topCategories} />
       </ChartWrapper>

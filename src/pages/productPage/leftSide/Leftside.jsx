@@ -71,7 +71,6 @@ const Leftside = ({ selectedCat, query, sort }) => {
         ))}
       </div>
 
-      {/* LOAD MORE */}
       {hasMore && (
         <div className="flex justify-center mt-10">
           {loading ? (

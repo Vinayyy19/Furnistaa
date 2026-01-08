@@ -15,7 +15,6 @@ const AddProduct = ({ onClose }) => {
 
   const [loading, setLoading] = useState(false);
 
-  /* Fetch categories */
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -83,13 +82,10 @@ const AddProduct = ({ onClose }) => {
 
   return (
     <>
-      {/* Backdrop */}
       <div
         onClick={onClose}
         className="fixed inset-0 bg-black/70 backdrop-blur-sm z-40"
       />
-
-      {/* Modal */}
       <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
         <form
           onClick={(e) => e.stopPropagation()}
@@ -154,7 +150,6 @@ const AddProduct = ({ onClose }) => {
             </div>
           </div>
 
-          {/* Featured Checkbox */}
           <div className="mb-6 flex items-center gap-3">
             <input
               type="checkbox"
@@ -167,7 +162,6 @@ const AddProduct = ({ onClose }) => {
             </label>
           </div>
 
-          {/* Images */}
           <div className="mb-8">
             <label className="text-sm text-neutral-400 mb-2 block">
               Product Images (Min 1, Max 6)
@@ -180,8 +174,6 @@ const AddProduct = ({ onClose }) => {
               className="block w-full text-sm text-neutral-400"
             />
           </div>
-
-          {/* Actions */}
           <div className="flex justify-end gap-4">
             <button
               type="button"

@@ -5,7 +5,6 @@ const Product = ({ item, onUpdateQty, onRemove }) => {
 
   return (
     <div className="flex items-center justify-between mt-4 px-6 py-5 rounded-2xl bg-[#4a3f2f] text-white">
-      {/* Product Info */}
       <div>
         <h1 className="text-lg font-semibold">{product.name}</h1>
         <p className="text-base text-gray-300 mt-1">
@@ -13,9 +12,7 @@ const Product = ({ item, onUpdateQty, onRemove }) => {
         </p>
       </div>
 
-      {/* Actions */}
       <div className="flex items-center gap-6">
-        {/* Quantity Control */}
         <div className="flex items-center bg-neutral-800 rounded-xl overflow-hidden">
           <button
             onClick={() => onUpdateQty(quantity - 1)}
@@ -37,7 +34,6 @@ const Product = ({ item, onUpdateQty, onRemove }) => {
           </button>
         </div>
 
-        {/* Remove Button */}
         <button
           onClick={onRemove}
           className="w-12 h-12 flex items-center justify-center rounded-xl bg-red-500/10 text-red-400 hover:bg-red-500/20 cursor-pointer"
