@@ -38,8 +38,7 @@ const Card = () => {
 
   return (
     <div>
-      <h2 className="p-2 font-bold text-white text-4xl">Top selling</h2>
-
+      <h2 className="p-8 font-bold text-white text-4xl">Top selling</h2>
       <div className="p-2 flex overflow-x-scroll hide-scrollbar">
         {loading
           ? Array.from({ length: skeletonCount }).map((_, i) => (

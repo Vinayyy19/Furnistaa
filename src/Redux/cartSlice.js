@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../api/axios";
 
-// Fetch cart
 export const fetchCart = createAsyncThunk(
   "cart/fetchCart",
   async (_, { rejectWithValue }) => {
@@ -14,7 +13,6 @@ export const fetchCart = createAsyncThunk(
   }
 );
 
-// Add to cart
 export const addToCart = createAsyncThunk(
   "cart/addToCart",
   async ({ productId, variantId, quantity }, { rejectWithValue }) => {
@@ -31,7 +29,6 @@ export const addToCart = createAsyncThunk(
   }
 );
 
-// Update cart quantity
 export const updateCartQty = createAsyncThunk(
   "cart/updateQty",
   async ({ productId, variantId, quantity }, { rejectWithValue }) => {
@@ -48,7 +45,6 @@ export const updateCartQty = createAsyncThunk(
   }
 );
 
-// Remove item
 export const removeCartItem = createAsyncThunk(
   "cart/removeItem",
   async ({ productId, variantId }, { rejectWithValue }) => {

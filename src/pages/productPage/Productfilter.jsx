@@ -32,7 +32,7 @@ const Productfilter = () => {
   };
 
   return (
-    <div className="sticky top-24 bg-[#111] border border-neutral-800 rounded-2xl p-5">
+    <div className="md:sticky md:top-24 bg-[#111] border border-neutral-800 rounded-2xl p-5">
       <h2 className="text-xl font-semibold text-white mb-1">Filters</h2>
       <p className="text-sm text-gray-400 mb-4">Refine your search</p>
 

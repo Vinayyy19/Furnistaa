@@ -5,6 +5,7 @@ const Left = ({ primaryImg, setPrimaryImg, images = [] }) => {
   const [bgSize, setBgSize] = useState("100%");
 
   const handleMove = (e) => {
+    if (window.innerWidth < 768) return;
     setBgSize("200%");
 
     const rect = e.currentTarget.getBoundingClientRect();

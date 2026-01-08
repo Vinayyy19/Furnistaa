@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Productcard from "./Productcard";
 import api from "../../../../api/axios";
+import LoadingCircle from "../../../Loading/LoadingCircle";
 
 const LIMIT = 12;
 
@@ -39,7 +40,7 @@ const Leftside = ({ selectedCat, query, sort }) => {
         const newProducts = res.data.products || [];
         const pagination = res.data.pagination;
 
-        setProducts(prev =>
+        setProducts((prev) =>
           page === 1 ? newProducts : [...prev, ...newProducts]
         );
 
@@ -59,11 +60,13 @@ const Leftside = ({ selectedCat, query, sort }) => {
   return (
     <>
       <p className="text-gray-400 mb-4">
-        {products.length>0?`Showing ${products.length} products`:"No product Available"}
+        {products.length > 0
+          ? `Showing ${products.length} products`
+          : loading?"Loading":"No product Available"}
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {products.map(product => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        {products.map((product) => (
           <Productcard key={product._id} product={product} />
         ))}
       </div>
@@ -71,13 +74,17 @@ const Leftside = ({ selectedCat, query, sort }) => {
       {/* LOAD MORE */}
       {hasMore && (
         <div className="flex justify-center mt-10">
-          <button
-            onClick={() => setPage(p => p + 1)}
-            disabled={loading}
-            className="px-6 py-3 rounded-xl cursor-pointer bg-orange-500 text-white font-medium hover:bg-orange-600 disabled:opacity-60"
-          >
-            {loading ? "Loading..." : "Load More"}
-          </button>
+          {loading ? (
+            <LoadingCircle />
+          ) : (
+            <button
+              onClick={() => setPage((p) => p + 1)}
+              disabled={loading}
+              className="px-6 py-3 rounded-xl cursor-pointer bg-orange-500 text-white font-medium hover:bg-orange-600 disabled:opacity-60"
+            >
+              Load More
+            </button>
+          )}
         </div>
       )}
     </>

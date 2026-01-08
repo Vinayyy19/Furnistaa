@@ -24,7 +24,7 @@ const Categories = () => {
 
   return (
     <div>
-      <h2 className="p-2 font-bold text-white text-4xl">Categories</h2>
+      <h2 className="p-8 font-bold text-white text-4xl">Categories</h2>
 
       <div className="p-4 overflow-x-auto hide-scrollbar min-h-[140px]">
         {!categories ? (

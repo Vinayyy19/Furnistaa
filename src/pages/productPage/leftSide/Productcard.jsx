@@ -14,6 +14,7 @@ const Productcard = ({ product }) => {
 
   const handleAddToCart = async (e) => {
     e.stopPropagation();
+
     if (!localStorage.getItem("token")) {
       toast.error("Login required");
       navigate("/login");
@@ -38,25 +39,31 @@ const Productcard = ({ product }) => {
   return (
     <div
       onClick={() => navigate(`/product/${product._id}`)}
-      className="group bg-[#121212] border border-neutral-800 rounded-2xl overflow-hidden cursor-pointer hover:-translate-y-1 hover:shadow-xl transition"
+      className="group bg-[#121212] border border-neutral-800 rounded-2xl overflow-hidden 
+                 cursor-pointer transition
+                 md:hover:-translate-y-1 md:hover:shadow-xl"
     >
-      <div className="h-48 overflow-hidden">
+      {/* IMAGE */}
+      <div className="h-44 sm:h-48 md:h-52 overflow-hidden">
         <img
           src={imageUrl}
           alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-110 transition"
+          className="w-full h-full object-cover transition md:group-hover:scale-110"
         />
       </div>
 
+      {/* CONTENT */}
       <div className="p-4">
         <h3 className="text-white font-semibold truncate">
           {product.name}
         </h3>
+
         <p className="text-xs text-gray-400 line-clamp-2 mt-1">
           {product.description}
         </p>
 
-        <div className="flex justify-between items-center mt-4">
+        {/* PRICE + ACTION */}
+        <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <span className="text-lg font-bold text-orange-500">
             {price ? `₹${price}` : "—"}
           </span>
@@ -64,7 +71,9 @@ const Productcard = ({ product }) => {
           <button
             onClick={handleAddToCart}
             disabled={adding}
-            className="px-4 py-1.5 text-xs rounded-full bg-orange-500 text-white hover:bg-orange-600 disabled:opacity-60"
+            className="w-full sm:w-auto px-4 py-2 text-xs rounded-full 
+                       bg-orange-500 text-white 
+                       hover:bg-orange-600 disabled:opacity-60"
           >
             {adding ? "Adding..." : "Add to Cart"}
           </button>

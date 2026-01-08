@@ -8,7 +8,7 @@ const Hero = () => {
     <div className="@container"> 
       <div className="p-4 @[480px]:px-4 @[480px]:py-3">
         <div 
-          className="bg-cover bg-center flex flex-col justify-end overflow-hidden bg-background-dark rounded-xl min-h-80" 
+          className="bg-cover bg-center flex flex-col justify-end overflow-hidden bg-background-dark rounded-xl min-h-90" 
           role="img" 
           aria-label={BG_ALT_TEXT} 
           style={{ 

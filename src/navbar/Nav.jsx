@@ -13,8 +13,8 @@ const Nav = () => {
     <nav className="flex items-center justify-between px-10 py-4 from-[#1f1b10] to-[#2a2416]">
       <Logo />
       <Searchbar />
-      <div className="flex items-center gap-6">
-        {isLoggedIn ? <User /> : <LoginButton />}
+      <div className="flex items-center gap-6 ml-5">
+        <div className="hidden md:block">{isLoggedIn ? <User /> : <LoginButton />}</div>
         <Cart />
         <Profile />
       </div>

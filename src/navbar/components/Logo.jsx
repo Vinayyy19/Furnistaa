@@ -7,7 +7,7 @@ const Logo = () => {
   return (
     <h1
       onClick={() => navigate("/")}
-      className="text-primary cursor-pointer font-extrabold text-3xl tracking-wide"
+      className="text-primary cursor-pointer font-extrabold text-3xl tracking-wide hidden md:block"
     >
       Furnista
     </h1>
