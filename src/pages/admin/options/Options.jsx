@@ -35,6 +35,12 @@ const Options = () => {
         }>
           Setting
         </NavLink>
+
+        <NavLink to="/admin/customer-msg" className={({ isActive }) =>
+          `block px-4 py-2 rounded ${isActive ? "bg-yellow-500 text-black" : "text-gray-300"}`
+        }>
+          Customer messages
+        </NavLink>
       </div>
 
       <NavLink to="/admin/logout" className="block px-4 py-2 text-gray-300">

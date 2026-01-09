@@ -5,6 +5,8 @@ import LoginButton from "./components/LoginButton";
 import Profile from "./components/Profile";
 import User from "./components/User";
 import Cart from "./components/Cart";
+import BulkOrder from "./components/BulkOrder";
+import Contactus from "./components/Contactus";
 
 const Nav = () => {
   const isLoggedIn = Boolean(localStorage.getItem("token"));
@@ -14,7 +16,9 @@ const Nav = () => {
       <Logo />
       <Searchbar />
       <div className="flex items-center gap-6 ml-5">
-        <div className="hidden md:block">{isLoggedIn ? <User /> : <LoginButton />}</div>
+        <div className="hidden md:block"><BulkOrder /></div>
+        <div className="hidden sm:block">{isLoggedIn ? <User /> : <LoginButton />}</div>
+        <div className="hidden md:block"><Contactus /></div>
         <Cart />
         <Profile />
       </div>

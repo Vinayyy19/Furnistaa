@@ -6,6 +6,7 @@ import Chat from "./Componenets/Chat";
 import Products from "./Componenets/Products";
 import AdminSetting from "./Componenets/AdminSetting";
 import AdminLogout from "./Componenets/SubPart/AdminLogout";
+import AdminMessages from "./Componenets/AdminMessages";
 
 const Admin = () => {
   return (
@@ -22,6 +23,7 @@ const Admin = () => {
           <Route path="orders" element={<Orders />} />
           <Route path="chat" element={<Chat />} />
           <Route path="setting" element={<AdminSetting />} />
+          <Route path="customer-msg" element = {<AdminMessages />} />
           <Route path="logout" element={<AdminLogout />} />
 
           <Route path="*" element={<Navigate to="dashboard" replace />} />

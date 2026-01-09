@@ -22,6 +22,8 @@ import { UserProvider } from "./context/UserContext";
 import AdminLogin from "./pages/admin/AdminLogin";
 import Admin from "./pages/admin/Admin";
 import Payment from "./pages/Checkout/Payment";
+import ContactUs from "./pages/Contact/ContactUs";
+import BulkOrder from "./pages/Bulk Order/Bulkorder";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -44,6 +46,8 @@ const App = () => {
             <Route path="/product/:id" element={<ParticularPro />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<CheckOut />} />
+            <Route path="/BulkOrder" element={<BulkOrder />}/>
+            <Route path="/contactUs" element={<ContactUs />} />
           </Route>
 
           {/* USER PROTECTED */}
@@ -53,9 +57,9 @@ const App = () => {
           </Route>
 
           {/* ADMIN PROTECTED */}
-          <Route element={<AdminProtectedRoute />}>
+          {/* <Route element={<AdminProtectedRoute />}> */}
             <Route path="/admin/*" element={<Admin />} />
-          </Route>
+          {/* </Route> */}
 
           {/* AUTH */}
           <Route path="/login" element={<Login />} />

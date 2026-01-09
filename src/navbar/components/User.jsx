@@ -8,7 +8,7 @@ const User = () => {
     <div>
       <span
         onClick={() => navigate("/user/chat")}
-        className="text-white font-bold cursor-pointer"
+        className="text-white font-bold cursor-pointer hover:underline"
       >
         Hello, {name}!
       </span>
