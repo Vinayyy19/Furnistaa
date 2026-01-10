@@ -1,40 +1,54 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 import { useUser } from "../../context/UserContext";
 import api from "../../../api/axios";
+
+const fieldVariant = {
+  hidden: { opacity: 0, y: 10 },
+  visible: { opacity: 1, y: 0 },
+};
 
 const Signup = () => {
   const { setUser } = useUser();
   const navigate = useNavigate();
+
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
   const [firstName, setfirstName] = useState("");
   const [lastName, setlastName] = useState("");
   const [phoneNumber, setphoneNumber] = useState("");
+
   const submitUser = async (e) => {
     e.preventDefault();
-    if (!firstName || !lastName || !email || !phoneNumber || !password || !confirmPassword) {
+
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !phoneNumber ||
+      !password ||
+      !confirmPassword
+    ) {
       toast.error("All fields are required");
       return;
     }
+
     if (password !== confirmPassword) {
       toast.error("Passwords do not match");
       return;
     }
+
     try {
-      const response = await api.post("/users/register",
-        {
-          name:{
-            firstName,
-            lastName
-          },
-          email,
-          phoneNumber,
-          password,
-        }
-      );
+      const response = await api.post("/users/register", {
+        name: { firstName, lastName },
+        email,
+        phoneNumber,
+        password,
+      });
+
       if (response.status === 201) {
         toast.success(
           "Welcome to Furnista! Your account has been created successfully."
@@ -44,160 +58,169 @@ const Signup = () => {
         setUser(response.data.user);
         navigate("/");
       } else {
-        setfirstName("");
-        setlastName("");
-        setemail("");
-        setphoneNumber("");
-        setpassword("");
-        setconfirmPassword("");
         toast.error("Registration failed. Please try again.");
       }
     } catch (error) {
-      if (error.response) {
-        toast.error(error.response.data.message);
-      } else {
-        toast.error("Network error. Please try again.");
-        setfirstName("");
-        setlastName("");
-        setemail("");
-        setphoneNumber("");
-        setpassword("");
-        setconfirmPassword("");
-      }
+      toast.error(
+        error.response?.data?.message || "Network error. Please try again."
+      );
     }
   };
-  // https://wallpapers.com/images/hd/high-resolution-wood-background-mc5m7on7t7ung98b.jpg
+
   return (
-    <div className="px-50 py-5 min-h-screen bg-background-dark">
+    <div className="min-h-screen bg-background-dark flex flex-col items-center justify-center px-4 py-8">
       <h1
         onClick={() => navigate("/")}
-        className="text-3xl font-bold text-primary cursor-pointer flex justify-center"
+        className="text-3xl font-bold text-primary cursor-pointer mb-6"
       >
         Furnista
       </h1>
-      <form
-        className="flex flex-1 flex-col px-4 pt-6 pb-8"
-        onSubmit={submitUser}
-      >
-        <h2 className="text-white text-[32px] font-bold leading-tight tracking-tight text-left">
-          Create Your Furnista Account
-        </h2>
-        <p className="text-white text-base font-normal leading-normal pt-1 pb-6">
-          Discover timeless elegance and craftsmanship.
-        </p>
 
-        <div className="flex flex-col space-y-4">
-          <div className="flex space-x-4 w-full">
-            <label className="flex flex-col w-1/2">
-            <p className="text-white text-base font-medium leading-normal pb-2">
-              First Name
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="w-full max-w-xl bg-[#2b2414] rounded-2xl border border-[#685a31] shadow-lg p-6 sm:p-8"
+      >
+        <motion.form
+          onSubmit={submitUser}
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: {},
+            visible: {
+              transition: { staggerChildren: 0.08 },
+            },
+          }}
+          className="flex flex-col gap-5"
+        >
+          <motion.div variants={fieldVariant}>
+            <h2 className="text-white text-2xl sm:text-3xl font-bold">
+              Create Your Account
+            </h2>
+            <p className="text-[#cbbc90] text-sm mt-1">
+              Discover timeless elegance and craftsmanship.
             </p>
-            <input
-              className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl border border-[#685a31] bg-[#342d18] h-14 p-4 text-base font-normal leading-normal text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 focus:border-primary"
-              placeholder="Enter your first name"
-              type="text"
-              value={firstName}
-              onChange={(e) => setfirstName(e.target.value)}
-            />
-          </label>
-          <label className="flex flex-col w-1/2">
-            <p className="text-white text-base font-medium leading-normal pb-2">
-              Last Name
-            </p>
-            <input
-              className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl border border-[#685a31] bg-[#342d18] h-14 p-4 text-base font-normal leading-normal text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 focus:border-primary"
-              placeholder="Enter your Last name"
-              type="text"
-              value={lastName}
-              onChange={(e) => setlastName(e.target.value)}
-            />
-          </label>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <motion.div variants={fieldVariant}>
+              <label className="text-white text-sm font-medium">
+                First Name
+              </label>
+              <input
+                className="mt-2 w-full h-12 rounded-xl border border-[#685a31] bg-[#342d18] px-4 text-white focus:ring-2 focus:ring-primary/50 focus:outline-none"
+                placeholder="First name"
+                value={firstName}
+                onChange={(e) => setfirstName(e.target.value)}
+              />
+            </motion.div>
+
+            <motion.div variants={fieldVariant}>
+              <label className="text-white text-sm font-medium">
+                Last Name
+              </label>
+              <input
+                className="mt-2 w-full h-12 rounded-xl border border-[#685a31] bg-[#342d18] px-4 text-white focus:ring-2 focus:ring-primary/50 focus:outline-none"
+                placeholder="Last name"
+                value={lastName}
+                onChange={(e) => setlastName(e.target.value)}
+              />
+            </motion.div>
           </div>
 
-          <label className="flex flex-col">
-            <p className="text-white text-base font-medium leading-normal pb-2">
+          <motion.div variants={fieldVariant}>
+            <label className="text-white text-sm font-medium">
               Email Address
-            </p>
+            </label>
             <input
-              className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl border border-[#685a31] bg-[#342d18] h-14 p-4 text-base font-normal leading-normal text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 focus:border-primary"
-              placeholder="Enter your email address"
               type="email"
+              className="mt-2 w-full h-12 rounded-xl border border-[#685a31] bg-[#342d18] px-4 text-white focus:ring-2 focus:ring-primary/50 focus:outline-none"
+              placeholder="you@example.com"
               value={email}
               onChange={(e) => setemail(e.target.value)}
             />
-          </label>
+          </motion.div>
 
-          <label className="flex flex-col">
-            <p className="text-white text-base font-medium leading-normal pb-2">
+          <motion.div variants={fieldVariant}>
+            <label className="text-white text-sm font-medium">
               Phone Number
-            </p>
+            </label>
             <input
-              className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl border border-[#685a31] bg-[#342d18] h-14 p-4 text-base font-normal leading-normal text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 focus:border-primary"
-              placeholder="Enter your phone number"
-              type="text"
+              className="mt-2 w-full h-12 rounded-xl border border-[#685a31] bg-[#342d18] px-4 text-white focus:ring-2 focus:ring-primary/50 focus:outline-none"
+              placeholder="Phone number"
               value={phoneNumber}
               onChange={(e) => setphoneNumber(e.target.value)}
             />
-          </label>
+          </motion.div>
 
-          <label className="flex flex-col">
-            <p className="text-white text-base font-medium leading-normal pb-2">
+          <motion.div variants={fieldVariant}>
+            <label className="text-white text-sm font-medium">
               Password
-            </p>
-            <div className="relative flex w-full items-center">
-              <input
-                className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl border border-[#685a31] bg-[#342d18] h-14 p-4 pr-12 text-base font-normal leading-normal text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 focus:border-primary"
-                placeholder="Enter your password"
-                type="password"
-                value={password}
-                onChange={(e) => setpassword(e.target.value)}
-              />
-            </div>
-          </label>
+            </label>
+            <input
+              type="password"
+              className="mt-2 w-full h-12 rounded-xl border border-[#685a31] bg-[#342d18] px-4 text-white focus:ring-2 focus:ring-primary/50 focus:outline-none"
+              placeholder="Create password"
+              value={password}
+              onChange={(e) => setpassword(e.target.value)}
+            />
+          </motion.div>
 
-          <label className="flex flex-col">
-            <p className="text-white text-base font-medium leading-normal pb-2">
+          <motion.div variants={fieldVariant}>
+            <label className="text-white text-sm font-medium">
               Confirm Password
-            </p>
-            <div className="relative flex w-full items-center">
-              <input
-                className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl border border-[#685a31] bg-[#342d18] h-14 p-4 pr-12 text-base font-normal leading-normal text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 focus:border-primary"
-                placeholder="Confirm password"
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setconfirmPassword(e.target.value)}
-              />
-            </div>
-          </label>
-        </div>
-        <p className="text-[#cbbc90] text-sm text-center font-normal leading-normal pt-6">
-          By creating an account, you agree to our <br />{" "}
-          <Link
-            className="font-medium text-primary underline"
-            to="/termsofservice"
+            </label>
+            <input
+              type="password"
+              className="mt-2 w-full h-12 rounded-xl border border-[#685a31] bg-[#342d18] px-4 text-white focus:ring-2 focus:ring-primary/50 focus:outline-none"
+              placeholder="Confirm password"
+              value={confirmPassword}
+              onChange={(e) => setconfirmPassword(e.target.value)}
+            />
+          </motion.div>
+
+          <motion.p
+            variants={fieldVariant}
+            className="text-xs text-[#cbbc90] text-center leading-relaxed"
           >
-            Terms of Service
-          </Link>{" "}
-          and{" "}
-          <Link className="font-medium text-primary underline" to="/privacy">
-            Privacy Policy
-          </Link>
-        </p>
-        <div className="mt-auto pt-8">
-          <button
-            className="flex w-full items-center justify-center rounded-xl bg-primary h-14 px-6 text-base font-bold text-background-dark transition-opacity hover:opacity-90 cursor-pointer"
+            By creating an account, you agree to our{" "}
+            <Link
+              to="/termsofservice"
+              className="text-primary underline font-medium"
+            >
+              Terms of Service
+            </Link>{" "}
+            and{" "}
+            <Link
+              to="/privacy"
+              className="text-primary underline font-medium"
+            >
+              Privacy Policy
+            </Link>
+          </motion.p>
+
+          <motion.button
+            variants={fieldVariant}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.97 }}
             type="submit"
+            className="mt-2 h-12 rounded-xl cursor-pointer bg-primary text-background-dark font-bold hover:opacity-90 transition"
           >
             Create Account
-          </button>
-        </div>
-        <p className="text-[#cbbc90] text-center text-base font-normal leading-normal pt-6">
-          Already have an account?{" "}
-          <Link className="font-bold text-primary" to="/login">
-            Log In
-          </Link>
-        </p>
-      </form>
+          </motion.button>
+
+          <motion.p
+            variants={fieldVariant}
+            className="text-center text-sm text-[#cbbc90]"
+          >
+            Already have an account?{" "}
+            <Link to="/login" className="text-primary font-bold cursor-pointer">
+              Log In
+            </Link>
+          </motion.p>
+        </motion.form>
+      </motion.div>
     </div>
   );
 };
