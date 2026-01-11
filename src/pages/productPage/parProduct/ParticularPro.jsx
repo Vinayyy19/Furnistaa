@@ -4,6 +4,7 @@ import Left from "./Left";
 import Right from "./Right";
 import Recommend from "./Recommend";
 import api from "../../../../api/axios";
+import Loading from "../../../Loading/LoadingCircle";
 
 const ParticularPro = () => {
   const { id } = useParams();
@@ -25,7 +26,11 @@ const ParticularPro = () => {
   }, [id]);
 
   if (!product) {
-    return <div className="text-white p-6">Loading...</div>;
+    return (
+      <div className="min-h-screen w-full flex items-center justify-center">
+        <Loading />
+      </div>
+    );
   }
 
   return (
