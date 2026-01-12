@@ -11,7 +11,7 @@ const statusColors = {
   DELIVERED: "bg-green-50 text-green-700 ring-green-200",
 };
 
-const OrderTable = ({ orders = [], refreshOrders }) => {
+const OrderTable = ({ orders = [], searchTerm = "", refreshOrders }) => {
   const [updatingId, setUpdatingId] = useState(null);
   const [pendingChange, setPendingChange] = useState(null);
 
@@ -36,6 +36,24 @@ const OrderTable = ({ orders = [], refreshOrders }) => {
     }
   };
 
+  const query = searchTerm.toLowerCase();
+
+  const filteredOrders = orders.filter((order) => {
+    const orderId = order?._id?.toLowerCase() || "";
+    const firstName = order?.userId?.name?.firstName?.toLowerCase() || "";
+    const lastName = order?.userId?.name?.lastName?.toLowerCase() || "";
+    const email = order?.userId?.email?.toLowerCase() || "";
+    const status = order?.currentStatus?.toLowerCase() || "";
+
+    return (
+      orderId.includes(query) ||
+      firstName.includes(query) ||
+      lastName.includes(query) ||
+      email.includes(query) ||
+      status.includes(query)
+    );
+  });
+
   return (
     <>
       <div className="bg-neutral-300 rounded-xl shadow-sm overflow-hidden">
@@ -51,8 +69,8 @@ const OrderTable = ({ orders = [], refreshOrders }) => {
           </thead>
 
           <tbody>
-            {orders.length > 0 ? (
-              orders.map((order) => {
+            {filteredOrders.length > 0 ? (
+              filteredOrders.map((order) => {
                 const allowedStatuses = getAllowedStatuses(order.currentStatus);
 
                 return (
@@ -78,6 +96,7 @@ const OrderTable = ({ orders = [], refreshOrders }) => {
                         {order.userId?.email}
                       </p>
                     </td>
+
                     <td className="px-6 py-5 text-right font-semibold text-gray-900">
                       ₹{order.pricing.finalAmount}
                     </td>

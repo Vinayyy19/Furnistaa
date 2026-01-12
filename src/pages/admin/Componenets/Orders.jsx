@@ -7,11 +7,12 @@ import LoadingBox from "../../../Loading/LoadingBox";
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const fetchOrders = async () => {
     try {
       const res = await api.get("/orders/all-orders");
-      setOrders(res.data.orders || []);
+      setOrders(Array.isArray(res.data.orders) ? res.data.orders : []);
     } catch (err) {
       console.error("Failed to fetch orders", err);
     } finally {
@@ -34,9 +35,16 @@ const Orders = () => {
         </p>
       </div>
 
-      <SearchProd />
+      <SearchProd
+        searchTerm={searchTerm}
+        onSearch={setSearchTerm}
+      />
 
-      <OrderTable orders={orders} refreshOrders={fetchOrders} />
+      <OrderTable
+        orders={orders}
+        searchTerm={searchTerm}
+        refreshOrders={fetchOrders}
+      />
     </div>
   );
 };
