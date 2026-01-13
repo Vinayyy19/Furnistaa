@@ -109,29 +109,6 @@ const Login = () => {
             >
               Log In
             </button>
-
-            <div className="relative my-6">
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 flex items-center"
-              >
-                <div className="w-full border-t border-primary/40"></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="bg-background-dark px-2 text-on-surface-dark-secondary">
-                  Or continue with
-                </span>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <button className="flex h-12 items-center justify-center gap-x-3 rounded-lg border border-primary/40 bg-surface-dark/80 text-on-surface-dark transition-colors hover:bg-surface-dark backdrop-blur-sm">
-                <span className="text-sm font-medium">Apple</span>
-              </button>
-              <button className="flex h-12 items-center justify-center gap-x-3 rounded-lg border border-primary/40 bg-surface-dark/80 text-on-surface-dark transition-colors hover:bg-surface-dark backdrop-blur-sm">
-                <span className="text-sm font-medium">Google</span>
-              </button>
-            </div>
           </form>
 
           <p className="mt-10 text-center text-sm text-on-surface-dark">

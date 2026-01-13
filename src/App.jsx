@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCart } from "./Redux/cartSlice";
-
 import Home from "./pages/home/home";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
@@ -12,11 +11,9 @@ import Product from "./pages/productPage/Product";
 import ParticularPro from "./pages/productPage/parProduct/ParticularPro";
 import Cart from "./pages/Chart/Cart";
 import CheckOut from "./pages/Checkout/CheckOut";
-
 import { ToastContainer } from "react-toastify";
 import ProtectedRoute from "./Component/ProtectedRoute";
 import AdminProtectedRoute from "./Component/AdminProtectedRoute";
-
 import Layout from "./Layout";
 import { UserProvider } from "./context/UserContext";
 import AdminLogin from "./pages/admin/AdminLogin";
