@@ -2,13 +2,14 @@ import { useState } from "react";
 import api from "../../../../../api/axios";
 import { toast } from "react-toastify";
 
-const STATUS_FLOW = ["BOOKED", "CONFIRMED", "SHIPPED", "DELIVERED"];
+const STATUS_FLOW = ["BOOKED", "CONFIRMED", "SHIPPED", "DELIVERED", "Delete"];
 
 const statusColors = {
   BOOKED: "bg-blue-50 text-blue-700 ring-blue-200",
   CONFIRMED: "bg-purple-50 text-purple-700 ring-purple-200",
   SHIPPED: "bg-yellow-50 text-yellow-800 ring-yellow-200",
   DELIVERED: "bg-green-50 text-green-700 ring-green-200",
+  Delete: "bg-red-600 text-red-600 ring-red-600",
 };
 
 const OrderTable = ({ orders = [], searchTerm = "", refreshOrders }) => {
@@ -23,7 +24,19 @@ const OrderTable = ({ orders = [], searchTerm = "", refreshOrders }) => {
   const confirmUpdate = async () => {
     const { orderId, status } = pendingChange;
     setUpdatingId(orderId);
-
+    if (status == "Delete") {
+      try {
+        await api.delete(`/orders/delete/${orderId}`);
+        toast.success("Order Deleted SuccessFully");
+        refreshOrders();
+      } catch {
+        toast.error("Failed to delete Order");
+      } finally {
+        setUpdatingId(null);
+        setPendingChange(null);
+        return;
+      }
+    }
     try {
       await api.patch(`/orders/edit/${orderId}/status`, { status });
       toast.success("Order status updated");
@@ -103,7 +116,9 @@ const OrderTable = ({ orders = [], searchTerm = "", refreshOrders }) => {
 
                     <td className="px-6 py-5 text-center">
                       <span
-                        className={`inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full ring-1 ${statusColors[order.currentStatus]}`}
+                        className={`inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full ring-1 ${
+                          statusColors[order.currentStatus]
+                        }`}
                       >
                         {order.currentStatus}
                       </span>
@@ -158,10 +173,7 @@ const OrderTable = ({ orders = [], searchTerm = "", refreshOrders }) => {
 
             <p className="text-sm text-gray-600 mt-2">
               Change order status to{" "}
-              <span className="font-medium">
-                {pendingChange.status}
-              </span>
-              ?
+              <span className="font-medium">{pendingChange.status}</span>?
             </p>
 
             <div className="mt-6 flex justify-end gap-3">

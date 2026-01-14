@@ -16,16 +16,16 @@ const Products = () => {
 
   const isAnyModalOpen = showAddCategory || showAddProduct;
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const res = await api.get("/product/getAllProducts");
-        setProducts(Array.isArray(res.data.Product) ? res.data.Product : []);
-      } catch (err) {
-        toast.error("Failed to load products");
-      }
-    };
+  const fetchProducts = async () => {
+    try {
+      const res = await api.get("/product/getAllProducts");
+      setProducts(Array.isArray(res.data.Product) ? res.data.Product : []);
+    } catch (err) {
+      toast.error("Failed to load products");
+    }
+  };
 
+  useEffect(() => {
     fetchProducts();
   }, []);
 
@@ -37,14 +37,12 @@ const Products = () => {
           onAddProduct={() => setShowAddProduct(true)}
         />
 
-        <SearchProd
-          searchTerm={searchTerm}
-          onSearch={setSearchTerm}
-        />
+        <SearchProd searchTerm={searchTerm} onSearch={setSearchTerm} />
 
         <ResultBox
           products={products}
           searchTerm={searchTerm}
+          refreshProduct={fetchProducts}
         />
       </div>
 

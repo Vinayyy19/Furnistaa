@@ -85,13 +85,13 @@ const AddVariantModal = ({ productId, onClose }) => {
             <button
               type="button"
               onClick={onClose}
-              className="px-6 py-2 rounded-lg border border-neutral-700 text-neutral-300 hover:bg-neutral-800"
+              className="cursor-pointer px-6 py-2 rounded-lg border border-neutral-700 text-neutral-300 hover:bg-neutral-800"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-6 py-2 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-500"
+              className="cursor-pointer px-6 py-2 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-500"
             >
               Save Variant
             </button>

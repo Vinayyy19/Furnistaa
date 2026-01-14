@@ -1,6 +1,6 @@
 import ResultCard from "./ResultCard";
 
-const ResultBox = ({ products, searchTerm }) => {
+const ResultBox = ({ products, searchTerm,refreshProduct }) => {
   const query = searchTerm.toLowerCase();
 
   const filteredProducts = products.filter((product) => {
@@ -31,7 +31,7 @@ const ResultBox = ({ products, searchTerm }) => {
         </div>
       ) : (
         filteredProducts.map((product) => (
-          <ResultCard key={product._id} product={product} />
+          <ResultCard key={product._id} product={product} refreshProduct={refreshProduct} />
         ))
       )}
     </div>
