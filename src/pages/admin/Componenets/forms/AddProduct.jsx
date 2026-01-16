@@ -177,8 +177,9 @@ const AddProduct = ({ onClose }) => {
           <div className="flex justify-end gap-4">
             <button
               type="button"
+              disabled={loading}
               onClick={onClose}
-              className="px-6 py-2 rounded-lg border border-neutral-600 text-neutral-300 hover:bg-neutral-800"
+              className="px-6 py-2 rounded-lg border border-neutral-600 text-neutral-300 hover:bg-neutral-800 disabled:opacity-50"
             >
               Cancel
             </button>

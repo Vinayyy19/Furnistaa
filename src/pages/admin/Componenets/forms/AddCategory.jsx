@@ -82,7 +82,8 @@ const AddCategory = ({ onClose }) => {
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 rounded-xl border border-neutral-600 text-white"
+              disabled={loading}
+              className="px-4 py-2 rounded-xl border border-neutral-600 text-white disabled:opacity-50"
             >
               Cancel
             </button>
