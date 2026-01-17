@@ -133,6 +133,16 @@ export const selectCartPricing = (state) => {
     0
   );
 
+  const savings = items.reduce((sum, item) => {
+    const market = item.variant?.marketPrice || 0;
+    const selling = item.variant?.sellingPrice || 0;
+
+    if (market > selling) {
+      return sum + (market - selling) * item.quantity;
+    }
+    return sum;
+  }, 0);
+
   const shippingFee = items.length > 0 ? 49 : 0;
 
   const totalPayable = subtotal + shippingFee;
@@ -142,6 +152,7 @@ export const selectCartPricing = (state) => {
     subtotal,
     shippingFee,
     totalPayable,
+    savings,
   };
 };
 

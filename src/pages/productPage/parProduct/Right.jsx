@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ShoppingCart, ChevronDown } from "lucide-react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux"; 
 import { addToCart } from "../../../Redux/cartSlice";
 import { toast } from "react-toastify";
 
@@ -9,6 +9,8 @@ const Right = ({ product }) => {
 
   const dispatch = useDispatch();
 
+  const cartItems = useSelector((state) => state.cart.items);
+
   const [count, setCount] = useState(1);
   const [open, setOpen] = useState("description");
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
@@ -16,20 +18,41 @@ const Right = ({ product }) => {
   const variants = product.variants || [];
   const variant = variants[selectedVariantIndex];
 
+  const alreadyInCartQty =
+    cartItems.find(
+      (item) =>
+        item.product?._id === product._id &&
+        item.variant?._id === variant?._id
+    )?.quantity || 0;
+
+  const availableStock = variant
+    ? variant.stockQty - alreadyInCartQty
+    : 0;
+
   const decrement = () => count > 1 && setCount(count - 1);
+
   const increment = () => {
-    if (variant && count < variant.stockQty) {
+    if (variant && count < availableStock) {
       setCount(count + 1);
     }
   };
 
   const handleAddToCart = () => {
     const token = localStorage.getItem("token");
-    if(!token){
+    if (!token) {
       toast.error("Login first to use cart");
       return;
     }
-    if (!variant || variant.stockQty <= 0) return;
+
+    if (!variant || availableStock <= 0) {
+      toast.error("Out of stock");
+      return;
+    }
+
+    if (count > availableStock) {
+      toast.error(`Only ${availableStock} item(s) left`);
+      return;
+    }
 
     dispatch(
       addToCart({
@@ -38,7 +61,8 @@ const Right = ({ product }) => {
         quantity: count,
       })
     );
-    toast("Product added successfully");
+
+    toast.success("Product added successfully");
   };
 
   const sections = [
@@ -75,7 +99,7 @@ const Right = ({ product }) => {
                   setSelectedVariantIndex(idx);
                   setCount(1);
                 }}
-                className={`flex justify-between cursor-pointer items-center px-4 py-3 rounded-xl border transition
+                className={`flex justify-between items-center px-4 py-3 rounded-xl border transition
                   ${
                     idx === selectedVariantIndex
                       ? "border-primary bg-primary text-black"
@@ -83,12 +107,8 @@ const Right = ({ product }) => {
                   }`}
               >
                 <div className="text-left">
-                  <p className="font-semibold capitalize">
-                    Color: {v.color}
-                  </p>
-                  <p className="text-sm opacity-80">
-                    Size: {v.size}
-                  </p>
+                  <p className="font-semibold capitalize">Color: {v.color}</p>
+                  <p className="text-sm opacity-80">Size: {v.size}</p>
                 </div>
 
                 <div className="text-right">
@@ -107,16 +127,18 @@ const Right = ({ product }) => {
         <div className="inline-flex items-center rounded-xl bg-zinc-800 px-2 py-1">
           <button
             onClick={decrement}
-            className="h-8 w-8 rounded-lg hover:bg-zinc-700 cursor-pointer"
+            className="h-8 w-8 rounded-lg hover:bg-zinc-700"
           >
             −
           </button>
+
           <div className="mx-3 min-w-6 text-center font-semibold">
             {count}
           </div>
+
           <button
             onClick={increment}
-            className="h-8 w-8 rounded-lg hover:bg-zinc-700 cursor-pointer"
+            className="h-8 w-8 rounded-lg hover:bg-zinc-700"
           >
             +
           </button>
@@ -124,13 +146,8 @@ const Right = ({ product }) => {
 
         <button
           onClick={handleAddToCart}
-          disabled={!variant || variant.stockQty <= 0}
-          className={`flex items-center gap-2 font-semibold px-6 py-3 rounded-2xl cursor-pointer
-            ${
-              variant?.stockQty <= 0
-                ? "bg-neutral-700 cursor-not-allowed"
-                : "bg-primary text-black"
-            }`}
+          disabled={!variant || availableStock <= 0}
+          className="flex items-center gap-2 font-semibold px-6 py-3 rounded-2xl bg-primary text-black disabled:bg-neutral-700 disabled:cursor-not-allowed"
         >
           <ShoppingCart size={18} />
           Add to Cart
@@ -144,18 +161,16 @@ const Right = ({ product }) => {
             <div key={section.key} className="border-b border-neutral-700 py-4">
               <button
                 onClick={() => setOpen(section.key)}
-                className="w-full flex justify-between items-center text-left font-semibold"
+                className="w-full flex justify-between items-center font-semibold"
               >
                 {section.title}
                 <ChevronDown
-                  className={`transition-transform ${
-                    isOpen ? "rotate-180" : ""
-                  }`}
+                  className={`transition-transform ${isOpen ? "rotate-180" : ""}`}
                 />
               </button>
 
               {isOpen && (
-                <p className="text-neutral-400 text-sm mt-3 leading-relaxed">
+                <p className="text-neutral-400 text-sm mt-3">
                   {section.content}
                 </p>
               )}

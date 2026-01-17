@@ -18,7 +18,6 @@ const CheckOut = () => {
         .catch((err) => console.log(err));
     }
   }, [user, setUser]);
-  const allDetails = Boolean(user?.address);
   return (
     <div>
       {!user ? <LoadingBox /> : <div className="flex p-10">
@@ -36,7 +35,7 @@ const CheckOut = () => {
             header={"DELIVERY ADDRESS"}
           />
           <FinalSummary />
-          <Continue allDetails={allDetails} email={user.email}/>
+          <Continue allDetails={user} email={user.email}/>
         </div>
         <div className="w-2/5 ml-10">
           <PriceDetails />

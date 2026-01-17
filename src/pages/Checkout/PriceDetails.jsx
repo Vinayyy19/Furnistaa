@@ -5,7 +5,7 @@ const PriceDetails = () => {
   const {
     items = [],
     subtotal = 0,
-    protectFee = 0,
+    shippingFee = 0,
     totalPayable = 0,
     savings = 0,
   } = useSelector(selectCartPricing);
@@ -31,7 +31,7 @@ const PriceDetails = () => {
         <div className="flex justify-between items-center">
           <p className="text-neutral-200">Protect Promise Fee</p>
           <p className="text-white font-medium">
-            ₹{protectFee.toLocaleString()}
+            ₹{shippingFee.toLocaleString()}
           </p>
         </div>
       </div>

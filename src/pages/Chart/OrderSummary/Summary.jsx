@@ -6,7 +6,7 @@ const Summary = () => {
   const {
     items,
     subtotal,
-    protectFee,
+    shippingFee,
     totalPayable,
   } = useSelector(selectCartPricing);
 
@@ -30,7 +30,7 @@ const Summary = () => {
 
         <div className="flex justify-between">
           <p>Protect Promise Fee</p>
-          <p>₹{protectFee}</p>
+          <p>₹{shippingFee}</p>
         </div>
       </div>
 

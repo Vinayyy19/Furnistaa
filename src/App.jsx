@@ -18,7 +18,6 @@ import Layout from "./Layout";
 import { UserProvider } from "./context/UserContext";
 import AdminLogin from "./pages/admin/AdminLogin";
 import Admin from "./pages/admin/Admin";
-import Payment from "./pages/Checkout/Payment";
 import ContactUs from "./pages/Contact/ContactUs";
 import BulkOrder from "./pages/Bulk Order/Bulkorder";
 
@@ -49,7 +48,6 @@ const App = () => {
 
           {/* USER PROTECTED */}
           <Route element={<ProtectedRoute />}>
-            <Route path="/payment" element={<Payment />} />
             <Route path="/user/*" element={<Chat />} />
           </Route>
 
