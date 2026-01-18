@@ -28,7 +28,6 @@ const Login = () => {
       toast.success("Login successful! Welcome back to Furnista.");
       navigate("/");
     } catch (error) {
-      toast.error(error);
       if (error.response) {
         toast.error(error.response.data.message);
       } else {

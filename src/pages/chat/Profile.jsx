@@ -1,6 +1,16 @@
+import { useEffect } from "react";
 import { useUser } from "../../context/UserContext";
+import api from "../../../api/axios";
 const Profile = () => {
-  const { user } = useUser();
+  const { user ,setUser} = useUser();
+  useEffect(() => {
+    if (!user) {
+      api
+        .get("/users/profile")
+        .then((res) => setUser(res.data.user))
+        .catch((err) => console.log(err));
+    }
+  }, [user, setUser]);
   return (
     <div className="p-4 flex">
         <div className="h-10 w-10 rounded-full overflow-hidden bg-primary">
