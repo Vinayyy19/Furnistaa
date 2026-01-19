@@ -99,7 +99,7 @@ const Right = ({ product }) => {
                   setSelectedVariantIndex(idx);
                   setCount(1);
                 }}
-                className={`flex justify-between items-center px-4 py-3 rounded-xl border transition
+                className={`flex justify-between items-center px-4 py-3 rounded-xl border transition cursor-pointer
                   ${
                     idx === selectedVariantIndex
                       ? "border-primary bg-primary text-black"
@@ -127,7 +127,7 @@ const Right = ({ product }) => {
         <div className="inline-flex items-center rounded-xl bg-zinc-800 px-2 py-1">
           <button
             onClick={decrement}
-            className="h-8 w-8 rounded-lg hover:bg-zinc-700"
+            className="h-8 w-8 rounded-lg hover:bg-zinc-700 cursor-pointer"
           >
             −
           </button>
@@ -138,7 +138,7 @@ const Right = ({ product }) => {
 
           <button
             onClick={increment}
-            className="h-8 w-8 rounded-lg hover:bg-zinc-700"
+            className="h-8 w-8 rounded-lg hover:bg-zinc-700 cursor-pointer"
           >
             +
           </button>
@@ -147,7 +147,7 @@ const Right = ({ product }) => {
         <button
           onClick={handleAddToCart}
           disabled={!variant || availableStock <= 0}
-          className="flex items-center gap-2 font-semibold px-6 py-3 rounded-2xl bg-primary text-black disabled:bg-neutral-700 disabled:cursor-not-allowed"
+          className="flex items-center gap-2 font-semibold px-6 py-3 rounded-2xl bg-primary text-black disabled:bg-neutral-700 disabled:cursor-not-allowed cursor-pointer"
         >
           <ShoppingCart size={18} />
           Add to Cart
@@ -161,7 +161,7 @@ const Right = ({ product }) => {
             <div key={section.key} className="border-b border-neutral-700 py-4">
               <button
                 onClick={() => setOpen(section.key)}
-                className="w-full flex justify-between items-center font-semibold"
+                className="w-full flex justify-between items-center font-semibold cursor-pointer"
               >
                 {section.title}
                 <ChevronDown

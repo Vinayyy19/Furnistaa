@@ -54,7 +54,7 @@ const Continue = ({ allDetails, email }) => {
 
             dispatch(clearCart());
             toast.success("Payment successful. Order booked!");
-            navigate("/user/history");
+            navigate("/user/history",{replace:true});
           } catch (err) {
             console.error("Verification failed:", err);
             toast.error(

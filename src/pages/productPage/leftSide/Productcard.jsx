@@ -68,7 +68,7 @@ const Productcard = ({ product }) => {
           <button
             onClick={handleAddToCart}
             disabled={adding}
-            className="w-full sm:w-auto px-4 py-2 text-xs rounded-full 
+            className="w-full sm:w-auto px-4 py-2 text-xs rounded-full cursor-pointer
                        bg-orange-500 text-white 
                        hover:bg-orange-600 disabled:opacity-60"
           >
