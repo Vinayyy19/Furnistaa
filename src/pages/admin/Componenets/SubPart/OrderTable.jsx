@@ -24,19 +24,21 @@ const OrderTable = ({ orders = [], searchTerm = "", refreshOrders }) => {
   const confirmUpdate = async () => {
     const { orderId, status } = pendingChange;
     setUpdatingId(orderId);
-    if (status == "Delete") {
+
+    if (status === "Delete") {
       try {
         await api.delete(`/orders/delete/${orderId}`);
-        toast.success("Order Deleted SuccessFully");
+        toast.success("Order Deleted Successfully");
         refreshOrders();
       } catch {
         toast.error("Failed to delete Order");
       } finally {
         setUpdatingId(null);
         setPendingChange(null);
-        return;
       }
+      return;
     }
+
     try {
       await api.patch(`/orders/edit/${orderId}/status`, { status });
       toast.success("Order status updated");
@@ -132,15 +134,16 @@ const OrderTable = ({ orders = [], searchTerm = "", refreshOrders }) => {
                       ) : (
                         <select
                           value={order.currentStatus}
-                          onChange={(e) =>
+                          onChange={(e) => {
+                            const selected = e.target.value;
                             setPendingChange({
                               orderId: order._id,
-                              status: e.target.value,
-                            })
-                          }
+                              status: selected,
+                            });
+                          }}
                           className="rounded-md border border-neutral-300 bg-neutral-50
                                      px-3 py-1.5 text-sm text-gray-700
-                                     focus:bg-white focus:ring-2 focus:ring-blue-500"
+                                     focus:bg-white focus:ring-2 focus:ring-blue-500 cursor-pointer"
                         >
                           {allowedStatuses.map((s) => (
                             <option key={s} value={s}>
@@ -168,25 +171,26 @@ const OrderTable = ({ orders = [], searchTerm = "", refreshOrders }) => {
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
           <div className="bg-white rounded-xl p-6 w-[360px]">
             <h3 className="text-lg font-semibold text-gray-900">
-              Confirm Status Update
+              Confirm {pendingChange.status === "Delete" ? "Delete" : "Status Update"}
             </h3>
 
             <p className="text-sm text-gray-600 mt-2">
-              Change order status to{" "}
-              <span className="font-medium">{pendingChange.status}</span>?
+              {pendingChange.status === "Delete"
+                ? "Are you sure you want to delete this order?"
+                : `Change order status to ${pendingChange.status}?`}
             </p>
 
             <div className="mt-6 flex justify-end gap-3">
               <button
                 onClick={() => setPendingChange(null)}
-                className="px-4 py-2 text-sm rounded-md border"
+                className="px-4 py-2 text-sm rounded-md border text-black cursor-pointer"
               >
                 Cancel
               </button>
 
               <button
                 onClick={confirmUpdate}
-                className="px-4 py-2 text-sm rounded-md bg-blue-600 text-white hover:bg-blue-700"
+                className="px-4 py-2 text-sm rounded-md bg-blue-600 text-white hover:bg-blue-700 cursor-pointer"
               >
                 Confirm
               </button>
