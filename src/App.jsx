@@ -20,6 +20,7 @@ import AdminLogin from "./pages/admin/AdminLogin";
 import Admin from "./pages/admin/Admin";
 import ContactUs from "./pages/Contact/ContactUs";
 import BulkOrder from "./pages/Bulk Order/Bulkorder";
+import ReactLenis from "lenis/react";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,16 @@ const App = () => {
   return (
     <BrowserRouter>
       <UserProvider>
-        <Routes>
+          <ReactLenis root options={{
+            lerp : 0.1,
+            orientation : "vertical",
+            gestureOrientation : "vertical",
+            smoothWheel : true,
+            wheelMultiplier : 1,
+            smoothTouch : false,
+            touchMultiplier : 2,
+          }}>
+            <Routes>
 
           {/* PUBLIC */}
           <Route element={<Layout />}>
@@ -63,6 +73,7 @@ const App = () => {
 
           <Route path="*" element={<Error404 />} />
         </Routes>
+          </ReactLenis>
 
         <ToastContainer />
       </UserProvider>
