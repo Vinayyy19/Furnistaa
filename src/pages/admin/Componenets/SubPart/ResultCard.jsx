@@ -121,7 +121,7 @@ const ResultCard = ({ product, refreshProduct }) => {
                     {variant.color} / {variant.size}
                   </span>
                   <span>₹{variant.sellingPrice}</span>
-                  <span>Stock: {variant.stock}</span>
+                  <span>Stock: {variant.stockQty}</span>
                   <span>{variant.sku}</span>
 
                   <div className="flex justify-center gap-2">
