@@ -36,7 +36,7 @@ const Chat = () => {
         <div className="md:hidden flex items-center p-4 bg-black border-b border-gray-800">
           <button
             onClick={() => setOpen(true)}
-            className="text-2xl mr-4"
+            className="text-2xl mr-4 cursor-pointer"
           >
             ☰
           </button>

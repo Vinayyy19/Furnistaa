@@ -37,7 +37,7 @@ const Cardcom = ({ product }) => {
 
           <h2 className="text-white font-bold">&#8377;{price} /- only</h2>
 
-          <button className="mt-2 active:scale-90 rounded-xl h-12 p-2 bg-primary text-background-dark font-bold transition">
+          <button className="mt-2 active:scale-90 rounded-xl h-12 p-2 bg-primary text-background-dark font-bold transition cursor-pointer">
             Click here
           </button>
         </>

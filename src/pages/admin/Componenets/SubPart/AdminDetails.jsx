@@ -27,7 +27,7 @@ const AdminDetails = ({ admin, onDelete, disableDelete }) => {
       <button
         onClick={deleteAdmin}
         disabled={disableDelete}
-        className={`w-10 h-10 flex items-center justify-center rounded-lg
+        className={`w-10 h-10 flex items-center justify-center rounded-lg cursor-pointer
           ${
             disableDelete
               ? "bg-neutral-700 text-neutral-500 cursor-not-allowed"

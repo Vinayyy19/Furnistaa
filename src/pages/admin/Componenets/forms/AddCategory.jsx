@@ -83,7 +83,7 @@ const AddCategory = ({ onClose }) => {
               type="button"
               onClick={onClose}
               disabled={loading}
-              className="px-4 py-2 rounded-xl border border-neutral-600 text-white disabled:opacity-50"
+              className="px-4 py-2 rounded-xl border border-neutral-600 text-white disabled:opacity-50 cursor-pointer"
             >
               Cancel
             </button>
@@ -91,7 +91,7 @@ const AddCategory = ({ onClose }) => {
             <button
               type="submit"
               disabled={loading}
-              className="px-4 py-2 rounded-xl bg-primary text-black font-bold disabled:opacity-50"
+              className="px-4 py-2 rounded-xl bg-primary text-black font-bold disabled:opacity-50 cursor-pointer"
             >
               {loading ? "Creating..." : "Add Category"}
             </button>

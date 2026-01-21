@@ -17,7 +17,7 @@ const ResultBox = ({ products, searchTerm,refreshProduct }) => {
 
   return (
     <div className="bg-black mt-5 rounded-xl border border-neutral-800 overflow-hidden">
-      <div className="grid grid-cols-[60px_2fr_1.5fr_1.5fr_1fr] px-4 py-3 text-xs uppercase tracking-wide text-neutral-400 border-b border-neutral-800">
+      <div className="grid grid-cols-[60px_2fr_1fr_3fr_1fr] px-4 py-3 text-xs uppercase tracking-wide text-neutral-400 border-b border-neutral-800">
         <span>Image</span>
         <span>Product Name</span>
         <span>Category</span>

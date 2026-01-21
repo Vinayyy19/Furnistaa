@@ -138,7 +138,7 @@ const AdminSetting = () => {
           <div className="flex justify-end">
             <button
               onClick={registerAdmin}
-              className="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-medium"
+              className="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-medium cursor-pointer"
             >
               Create Admin
             </button>

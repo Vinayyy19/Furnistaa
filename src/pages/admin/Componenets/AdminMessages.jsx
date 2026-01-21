@@ -91,7 +91,7 @@ const AdminMessages = () => {
         <button
           disabled={page === 1}
           onClick={() => setPage((p) => p - 1)}
-          className="px-4 py-2 border rounded-md disabled:opacity-50"
+          className="px-4 py-2 border rounded-md disabled:opacity-50 cursor-pointer"
         >
           Prev
         </button>
@@ -101,7 +101,7 @@ const AdminMessages = () => {
         <button
           disabled={page === totalPages}
           onClick={() => setPage((p) => p + 1)}
-          className="px-4 py-2 border rounded-md disabled:opacity-50"
+          className="px-4 py-2 border rounded-md disabled:opacity-50 cursor-pointer"
         >
           Next
         </button>

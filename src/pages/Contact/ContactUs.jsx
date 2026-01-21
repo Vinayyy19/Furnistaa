@@ -96,7 +96,7 @@ const ContactUs = () => {
           </div>
 
           <div>
-            <button className="w-full bg-black text-white py-4 rounded-md text-lg font-medium">
+            <button className="w-full bg-black text-white py-4 rounded-md text-lg font-medium cursor-pointer">
               Chat with us
             </button>
 

@@ -35,7 +35,7 @@ const UserDetails = ({ step, name, number, header }) => {
 
       <button
         onClick={() => navigate("/user/setting")}
-        className="border bg-yellow-400 px-6 py-2 rounded text-black font-semibold hover:bg-yellow-300"
+        className="border bg-yellow-400 px-6 py-2 rounded text-black font-semibold hover:bg-yellow-300 cursor-pointer"
       >
         CHANGE
       </button>

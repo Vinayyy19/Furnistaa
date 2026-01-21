@@ -11,14 +11,14 @@ const Head = ({ onAddCategory, onAddProduct }) => {
       <div className="flex gap-4">
         <button
           onClick={onAddCategory}
-          className="px-5 py-3 bg-primary text-black rounded-xl font-medium hover:bg-amber-400"
+          className="px-5 py-3 bg-primary text-black rounded-xl font-medium hover:bg-amber-400 cursor-pointer"
         >
           + Add Category
         </button>
 
         <button
           onClick={onAddProduct}
-          className="px-5 py-3 bg-primary text-black rounded-xl font-medium hover:bg-amber-400"
+          className="px-5 py-3 bg-primary text-black rounded-xl font-medium hover:bg-amber-400 cursor-pointer"
         >
           + Add Product
         </button>

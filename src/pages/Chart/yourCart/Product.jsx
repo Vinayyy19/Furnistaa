@@ -13,7 +13,7 @@ const Product = ({ item, onUpdateQty, onRemove }) => {
       </div>
 
       <div className="flex items-center gap-6">
-        <div className="flex items-center bg-neutral-800 rounded-xl overflow-hidden">
+        <div className="flex items-center bg-neutral-800 rounded-xl overflow-hidden cursor-pointer">
           <button
             onClick={() => onUpdateQty(quantity - 1)}
             disabled={quantity <= 1}
@@ -28,7 +28,7 @@ const Product = ({ item, onUpdateQty, onRemove }) => {
 
           <button
             onClick={() => onUpdateQty(quantity + 1)}
-            className="w-12 h-12 flex items-center justify-center hover:bg-neutral-700"
+            className="w-12 h-12 flex items-center justify-center hover:bg-neutral-700 cursor-pointer"
           >
             <Plus size={20} />
           </button>

@@ -27,7 +27,7 @@ const Product = () => {
       <div className="flex justify-between items-center mb-6">
         <button
           onClick={() => setShowFilter(true)}
-          className="md:hidden flex items-center gap-2 border border-neutral-700 px-4 py-2 rounded-lg text-sm text-white"
+          className="md:hidden flex items-center gap-2 border border-neutral-700 px-4 py-2 rounded-lg text-sm text-white cursor-pointer"
         >
           <SlidersHorizontal size={16} />
           Filters
@@ -64,7 +64,7 @@ const Product = () => {
           <div className="absolute left-0 top-0 h-full w-[85%] bg-[#111] p-4 overflow-y-auto">
             <button
               onClick={() => setShowFilter(false)}
-              className="mb-4 text-sm text-gray-400"
+              className="mb-4 text-sm text-gray-400 cursor-pointer"
             >
               Close
             </button>

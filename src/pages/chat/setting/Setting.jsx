@@ -129,7 +129,7 @@ const Setting = () => {
             <button
               disabled={isEditingP}
               onClick={() => setisEditingP(true)}
-              className="px-4 py-2 rounded-md text-sm font-medium text-white bg-neutral-700 hover:bg-neutral-600 disabled:bg-neutral-800 disabled:text-neutral-500"
+              className="px-4 py-2 rounded-md text-sm font-medium text-white bg-neutral-700 hover:bg-neutral-600 disabled:bg-neutral-800 disabled:text-neutral-500 cursor-pointer"
             >
               <div className="flex gap-2">
                 <PencilLine size={18} /> <p>Edit</p>
@@ -198,13 +198,13 @@ const Setting = () => {
         {isEditingP && (
           <div className="flex justify-end gap-4">
             <button
-              className="px-6 py-3 rounded-md text-white bg-neutral-700"
+              className="px-6 py-3 rounded-md text-white bg-neutral-700 cursor-pointer"
               onClick={handleCancel}
             >
               Cancel
             </button>
             <button
-              className="px-6 py-3 rounded-md text-white bg-blue-600"
+              className="px-6 py-3 rounded-md text-white bg-blue-600 cursor-pointer"
               onClick={() => handleSaveChanges("personal")}
             >
               Save Changes
@@ -221,7 +221,7 @@ const Setting = () => {
             <button
               disabled={isEditingA}
               onClick={() => setisEditingA(true)}
-              className="px-4 py-2 rounded-md text-sm font-medium text-white bg-neutral-700 hover:bg-neutral-600 disabled:bg-neutral-800"
+              className="px-4 py-2 rounded-md text-sm font-medium text-white bg-neutral-700 hover:bg-neutral-600 disabled:bg-neutral-800 cursor-pointer"
             >
               <div className="flex gap-2">
                 <PencilLine size={18} /> <p>Edit</p>
@@ -277,13 +277,13 @@ const Setting = () => {
         {isEditingA && (
           <div className="flex justify-end gap-4">
             <button
-              className="px-6 py-3 rounded-md text-white bg-neutral-700"
+              className="px-6 py-3 rounded-md text-white bg-neutral-700 cursor-pointer"
               onClick={handleCancel}
             >
               Cancel
             </button>
             <button
-              className="px-6 py-3 rounded-md text-white bg-blue-600"
+              className="px-6 py-3 rounded-md text-white bg-blue-600 cursor-pointer"
               onClick={() => handleSaveChanges("address")}
             >
               Save Changes
