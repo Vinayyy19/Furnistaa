@@ -27,7 +27,7 @@ import { UserProvider } from "./context/UserContext";
 
 const AppShell = () => {
   const location = useLocation();
-  const isAdminRoute = location.pathname.startsWith("/admin");
+  const isAdminRoute = location.pathname.startsWith("/admin") || location.pathname.startsWith("/user");
   const dispatch = useDispatch();
   const initialized = useSelector((state) => state.cart.initialized);
   useEffect(() => {
