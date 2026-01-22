@@ -111,8 +111,8 @@ const Setting = () => {
   if (!user) return <LoadingBox />;
 
   return (
-    <div className="p-5 space-y-6 h-screen overflow-auto">
-      <div className="p-10 space-y-6 overflow-auto hide-scrollbar h-screen">
+    <div className="space-y-6 h-screen">
+      <div className="p-10 space-y-6 h-screen">
         <div>
           <div className="text-white text-3xl font-bold">Account Settings</div>
           <div className="text-neutral-400">

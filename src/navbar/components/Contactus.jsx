@@ -7,6 +7,7 @@ const Contactus = () => {
   return (
     <button
       onClick={() => navigate("/contactUs")}
+      title="Contact us"
       className="w-11 cursor-pointer h-11 flex items-center justify-center rounded-full bg-primary hover:brightness-110 transition"
     >
       <Phone className="text-black" size={20} />

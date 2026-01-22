@@ -15,6 +15,7 @@ const Cart = () => {
   return (
     <div
       onClick={() => navigate("/cart")}
+      title="Cart"
       className="relative flex items-center justify-center h-11 w-11 rounded-full cursor-pointer bg-primary hover:brightness-110 transition"
     >
       <ShoppingCart size={20} className="text-black" />

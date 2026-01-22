@@ -1,7 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useState } from "react";
 import Leftbox from "./Leftbox";
-import Rightbox from "./Rightbox";
 import History from "./History/History";
 import Return from "./returnPage/Return";
 import Setting from "./setting/Setting";
@@ -45,7 +44,6 @@ const Chat = () => {
 
         <div className="flex-1 bg-surface-dark overflow-y-auto p-4 md:p-6">
           <Routes>
-            <Route path="chat" element={<Rightbox />} />
             <Route path="history" element={<History />} />
             <Route path="return" element={<Return />} />
             <Route path="setting" element={<Setting />} />

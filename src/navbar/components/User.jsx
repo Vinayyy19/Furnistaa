@@ -7,7 +7,8 @@ const User = () => {
   return (
     <div>
       <span
-        onClick={() => navigate("/user/chat")}
+        onClick={() => navigate("/user/history")}
+        title="User"
         className="text-white font-bold cursor-pointer hover:underline"
       >
         Hello, {name}!

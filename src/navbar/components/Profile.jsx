@@ -6,7 +6,8 @@ const Profile = () => {
 
   return (
     <button
-      onClick={() => navigate("/user/chat")}
+      onClick={() => navigate("/user/setting")}
+      title="User Profile"
       className="w-11 cursor-pointer h-11 flex items-center justify-center rounded-full bg-primary hover:brightness-110 transition"
     >
       <User className="text-black" size={20} />

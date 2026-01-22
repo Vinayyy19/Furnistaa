@@ -24,12 +24,6 @@ const Options = () => {
           Orders
         </NavLink>
 
-        <NavLink to="/admin/chat" className={({ isActive }) =>
-          `block px-4 py-2 rounded ${isActive ? "bg-yellow-500 text-black" : "text-gray-300"}`
-        }>
-          Chat
-        </NavLink>
-
         <NavLink to="/admin/setting" className={({ isActive }) =>
           `block px-4 py-2 rounded ${isActive ? "bg-yellow-500 text-black" : "text-gray-300"}`
         }>

@@ -11,9 +11,6 @@ const Leftbox = () => {
     <div className="h-full w-full bg-black flex flex-col justify-between overflow-auto hide-scrollbar">
       <div className="p-4 space-y-3">
           <Profile />
-          <Link to={"/user/chat"}>
-            <Chat />
-          </Link>
           <Link to={"/user/history"}>
             <OrderHis />
           </Link>

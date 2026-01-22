@@ -23,7 +23,7 @@ const History = () => {
   }, []);
   if (loading) return <LoadingBox />;
   return (
-    <div className="h-screen p-5 overflow-auto space-y-6">
+    <div className="h-screen p-5 space-y-6">
       {orders.length === 0 ? (
         <div className="h-full flex items-center justify-center text-neutral-400 text-lg">
           You haven’t placed any orders yet.

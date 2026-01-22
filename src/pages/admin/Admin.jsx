@@ -3,7 +3,6 @@ import { useState } from "react";
 import Options from "./options/Options";
 import DashBoard from "./Componenets/DashBoard";
 import Orders from "./Componenets/Orders";
-import Chat from "./Componenets/Chat";
 import Products from "./Componenets/Products";
 import AdminSetting from "./Componenets/AdminSetting";
 import AdminLogout from "./Componenets/SubPart/AdminLogout";
@@ -51,7 +50,6 @@ const Admin = () => {
             <Route path="dashboard" element={<DashBoard />} />
             <Route path="products" element={<Products />} />
             <Route path="orders" element={<Orders />} />
-            <Route path="chat" element={<Chat />} />
             <Route path="setting" element={<AdminSetting />} />
             <Route path="customer-msg" element={<AdminMessages />} />
             <Route path="logout" element={<AdminLogout />} />
