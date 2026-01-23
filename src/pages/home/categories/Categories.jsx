@@ -8,29 +8,29 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const SCROLL_AMOUNT = 280;
 
-const Categories = () => {
+const Categories = ({ setLoading }) => {
   const [categories, setCategories] = useState(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
 
   const navigate = useNavigate();
   const scrollRef = useRef(null);
-  const isDragging = useRef(false);
-  const startX = useRef(0);
-  const scrollLeft = useRef(0);
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
+        setLoading(true);
         const res = await api.get("/product/getCategories");
         setCategories(res.data.categories);
-      } catch {
+      } catch (err) {
         toast.error("Server is not running. Please contact the owner.");
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchCategories();
-  }, []);
+  }, [setLoading]);
 
   const updateScrollState = () => {
     const el = scrollRef.current;
@@ -57,27 +57,6 @@ const Categories = () => {
     return () => el.removeEventListener("wheel", onWheel);
   }, []);
 
-  const onMouseDown = (e) => {
-    isDragging.current = true;
-    startX.current = e.pageX - scrollRef.current.offsetLeft;
-    scrollLeft.current = scrollRef.current.scrollLeft;
-    scrollRef.current.classList.add("cursor-grabbing");
-  };
-
-  const stopDragging = () => {
-    isDragging.current = false;
-    scrollRef.current.classList.remove("cursor-grabbing");
-  };
-
-  const onMouseMove = (e) => {
-    if (!isDragging.current) return;
-    e.preventDefault();
-    const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX.current) * 1.5;
-    scrollRef.current.scrollLeft = scrollLeft.current - walk;
-    updateScrollState();
-  };
-
   const scrollBy = (dir) => {
     scrollRef.current.scrollBy({
       left: dir * SCROLL_AMOUNT,
@@ -85,11 +64,6 @@ const Categories = () => {
     });
 
     requestAnimationFrame(updateScrollState);
-  };
-
-  const onKeyDown = (e) => {
-    if (e.key === "ArrowRight") scrollBy(1);
-    if (e.key === "ArrowLeft") scrollBy(-1);
   };
 
   return (
@@ -108,9 +82,7 @@ const Categories = () => {
         {canScrollLeft && (
           <button
             onClick={() => scrollBy(-1)}
-            onKeyDown={onKeyDown}
-            aria-label="Scroll categories left"
-            className="hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-black/70 hover:bg-black text-white p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-white cursor-pointer"
+            className="hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-black/70 hover:bg-black text-white p-2 rounded-full"
           >
             <ChevronLeft />
           </button>
@@ -119,9 +91,7 @@ const Categories = () => {
         {canScrollRight && (
           <button
             onClick={() => scrollBy(1)}
-            onKeyDown={onKeyDown}
-            aria-label="Scroll categories right"
-            className="hidden md:flex absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/70 hover:bg-black text-white p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-white cursor-pointer"
+            className="hidden md:flex absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/70 hover:bg-black text-white p-2 rounded-full"
           >
             <ChevronRight />
           </button>
@@ -129,16 +99,8 @@ const Categories = () => {
 
         <div
           ref={scrollRef}
-          tabIndex={0}
-          role="region"
-          aria-label="Product categories"
-          className="overflow-x-auto hide-scrollbar min-h-[140px] cursor-grab select-none focus:outline-none"
-          onMouseDown={onMouseDown}
-          onMouseUp={stopDragging}
-          onMouseLeave={stopDragging}
-          onMouseMove={onMouseMove}
+          className="overflow-x-auto hide-scrollbar min-h-[140px]"
           onScroll={updateScrollState}
-          onKeyDown={onKeyDown}
         >
           {!categories ? (
             <LoadingCircle />

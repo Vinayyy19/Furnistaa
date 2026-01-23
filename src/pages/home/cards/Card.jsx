@@ -14,9 +14,6 @@ const Card = () => {
   const [canScrollRight, setCanScrollRight] = useState(false);
 
   const scrollRef = useRef(null);
-  const isDragging = useRef(false);
-  const startX = useRef(0);
-  const startScrollLeft = useRef(0);
 
   useEffect(() => {
     const updateSkeletons = () => {
@@ -71,38 +68,13 @@ const Card = () => {
     return () => el.removeEventListener("wheel", onWheel);
   }, []);
 
-  const onMouseDown = (e) => {
-    isDragging.current = true;
-    startX.current = e.pageX - scrollRef.current.offsetLeft;
-    startScrollLeft.current = scrollRef.current.scrollLeft;
-    scrollRef.current.classList.add("cursor-grabbing");
-  };
-
-  const stopDragging = () => {
-    isDragging.current = false;
-    scrollRef.current.classList.remove("cursor-grabbing");
-  };
-
-  const onMouseMove = (e) => {
-    if (!isDragging.current) return;
-    e.preventDefault();
-    const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX.current) * 1.5;
-    scrollRef.current.scrollLeft = startScrollLeft.current - walk;
-    updateScrollState();
-  };
-
   const scrollBy = (dir) => {
     scrollRef.current.scrollBy({
       left: dir * SCROLL_AMOUNT,
       behavior: "smooth",
     });
-    requestAnimationFrame(updateScrollState);
-  };
 
-  const onKeyDown = (e) => {
-    if (e.key === "ArrowRight") scrollBy(1);
-    if (e.key === "ArrowLeft") scrollBy(-1);
+    requestAnimationFrame(updateScrollState);
   };
 
   return (
@@ -121,9 +93,7 @@ const Card = () => {
         {canScrollLeft && (
           <button
             onClick={() => scrollBy(-1)}
-            onKeyDown={onKeyDown}
-            aria-label="Scroll products left"
-            className="hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-black/70 hover:bg-black text-white p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-white cursor-pointer"
+            className="hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-black/70 hover:bg-black text-white p-2 rounded-full"
           >
             <ChevronLeft />
           </button>
@@ -132,9 +102,7 @@ const Card = () => {
         {canScrollRight && (
           <button
             onClick={() => scrollBy(1)}
-            onKeyDown={onKeyDown}
-            aria-label="Scroll products right"
-            className="hidden md:flex absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/70 hover:bg-black text-white p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-white cursor-pointer"
+            className="hidden md:flex absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/70 hover:bg-black text-white p-2 rounded-full"
           >
             <ChevronRight />
           </button>
@@ -142,16 +110,8 @@ const Card = () => {
 
         <div
           ref={scrollRef}
-          tabIndex={0}
-          role="region"
-          aria-label="Top selling products"
-          className="flex gap-4 overflow-x-auto hide-scrollbar cursor-grab select-none py-4 focus:outline-none"
-          onMouseDown={onMouseDown}
-          onMouseUp={stopDragging}
-          onMouseLeave={stopDragging}
-          onMouseMove={onMouseMove}
+          className="flex gap-4 overflow-x-auto hide-scrollbar py-4"
           onScroll={updateScrollState}
-          onKeyDown={onKeyDown}
         >
           {loading
             ? Array.from({ length: skeletonCount }).map((_, i) => (

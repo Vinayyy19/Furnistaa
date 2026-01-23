@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCart } from "./Redux/cartSlice";
 import ReactLenis from "lenis/react";
 
-import Home from "./pages/home/home";
+import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
 import Error404 from "./pages/Error404";
