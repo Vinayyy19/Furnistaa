@@ -7,9 +7,11 @@ import User from "./components/User";
 import Cart from "./components/Cart";
 import BulkOrder from "./components/BulkOrder";
 import Contactus from "./components/Contactus";
+import { useUser } from "../context/UserContext";
 
 const Nav = () => {
-  const isLoggedIn = Boolean(localStorage.getItem("token"));
+  const { user } = useUser();
+  const isLoggedIn = Boolean(user);
 
   return (
     <nav className="flex items-center justify-between px-10 py-4 from-[#1f1b10] to-[#2a2416]">

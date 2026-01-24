@@ -16,17 +16,11 @@ const logoutUser = async () => {
     await api.post("/users/logout");
     toast.success("You have been logged out successfully.");
   } catch (error) {
-    if (error.response?.status === 401) {
-      toast.info("Session already expired. Logged out.");
-    } else {
-      toast.error("Logout failed on server. Logged out locally.");
-    }
+    toast.info("Session already expired. Logged out.");
   } finally {
-    navigate("/", { replace: true });
-    dispatch(clearCart());
     setUser(null);
-    localStorage.removeItem("token");
-    localStorage.removeItem("name");
+    dispatch(clearCart());
+    navigate("/", { replace: true });
   }
 };
 

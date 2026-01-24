@@ -22,8 +22,6 @@ const Login = () => {
         email,
         password,
       });
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("name", response.data.user.name.firstName);
       setUser(response.data.user);
       toast.success("Login successful! Welcome back to Furnista.");
       navigate("/");

@@ -53,8 +53,6 @@ const Signup = () => {
         toast.success(
           "Welcome to Furnista! Your account has been created successfully."
         );
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("name", firstName);
         setUser(response.data.user);
         navigate("/");
       } else {

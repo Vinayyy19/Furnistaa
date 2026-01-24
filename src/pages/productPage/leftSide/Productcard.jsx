@@ -3,8 +3,10 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../../../Redux/cartSlice";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { useUser } from "../../../context/UserContext";
 
 const Productcard = ({ product }) => {
+  const { user } = useUser();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [adding, setAdding] = useState(false);
@@ -15,7 +17,7 @@ const Productcard = ({ product }) => {
   const handleAddToCart = async (e) => {
     e.stopPropagation();
 
-    if (!localStorage.getItem("token")) {
+    if (!user) {
       toast.error("Login required");
       navigate("/login");
       return;

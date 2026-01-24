@@ -2,9 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../../api/axios";
 import { toast } from "react-toastify";
+import {useAdminAuth} from "../../context/AdminAuthContext";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
+  const { setAdmin } = useAdminAuth();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -21,14 +24,9 @@ const AdminLogin = () => {
         email,
         password,
       });
-
-      const { token , admin } = response.data;
-
-      localStorage.setItem("token", token);
-      localStorage.setItem("role", admin.role);
-
+      setAdmin(response.data.admin);
       toast.success("Login successful! Welcome back to Furnista.");
-      navigate("/admin/dashboard");
+      navigate("/admin/dashboard", { replace: true });
     } catch (error) {
       toast.error(
         error.response?.data?.message || "Network error. Please try again."

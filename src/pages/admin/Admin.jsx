@@ -1,5 +1,6 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import { useState } from "react";
+
 import Options from "./options/Options";
 import DashBoard from "./Componenets/DashBoard";
 import Orders from "./Componenets/Orders";
@@ -7,6 +8,7 @@ import Products from "./Componenets/Products";
 import AdminSetting from "./Componenets/AdminSetting";
 import AdminLogout from "./Componenets/SubPart/AdminLogout";
 import AdminMessages from "./Componenets/AdminMessages";
+import AdminRoleRoute from "../../Component/AdminRoleRoute";
 
 const Admin = () => {
   const [open, setOpen] = useState(false);
@@ -34,7 +36,10 @@ const Admin = () => {
 
       <div className="flex-1 flex flex-col overflow-hidden">
         <div className="md:hidden flex items-center p-4 bg-black border-b border-gray-800">
-          <button onClick={() => setOpen(true)} className="text-2xl mr-4 cursor-pointer">
+          <button
+            onClick={() => setOpen(true)}
+            className="text-2xl mr-4 cursor-pointer"
+          >
             ☰
           </button>
 
@@ -47,13 +52,30 @@ const Admin = () => {
 
         <div className="flex-1 p-4 md:p-6 overflow-y-auto">
           <Routes>
-            <Route path="dashboard" element={<DashBoard />} />
+            <Route
+              path="dashboard"
+              element={
+                <AdminRoleRoute>
+                  <DashBoard />
+                </AdminRoleRoute>
+              }
+            />
+
+            <Route
+              path="setting"
+              element={
+                <AdminRoleRoute>
+                  <AdminSetting />
+                </AdminRoleRoute>
+              }
+            />
+
             <Route path="products" element={<Products />} />
             <Route path="orders" element={<Orders />} />
-            <Route path="setting" element={<AdminSetting />} />
             <Route path="customer-msg" element={<AdminMessages />} />
             <Route path="logout" element={<AdminLogout />} />
-            <Route path="*" element={<Navigate to="dashboard" replace />} />
+
+            <Route path="*" element={<Navigate to="orders" replace />} />
           </Routes>
         </div>
       </div>

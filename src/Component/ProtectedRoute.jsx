@@ -1,17 +1,14 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useUser } from "../context/UserContext";
-import {useEffect} from "react";
 
 const ProtectedRoute = () => {
-  const { setUser } = useUser();
-  const token = localStorage.getItem("token");
-  useEffect(() => {
-    if (!token) {
-      setUser(null);
-    }
-  }, [token]);
+  const { user, loading } = useUser();
 
-  return token ? <Outlet /> : <Navigate to="/login" replace />;
+  if (loading) {
+    return null;
+  }
+
+  return user ? <Outlet /> : <Navigate to="/login" replace />;
 };
 
 export default ProtectedRoute;

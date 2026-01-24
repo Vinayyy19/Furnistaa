@@ -3,8 +3,11 @@ import { ShoppingCart, ChevronDown } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux"; 
 import { addToCart } from "../../../Redux/cartSlice";
 import { toast } from "react-toastify";
+import { useUser } from "../../../context/UserContext";
 
 const Right = ({ product }) => {
+  const { user } = useUser();
+
   if (!product) return null;
 
   const dispatch = useDispatch();
@@ -38,8 +41,7 @@ const Right = ({ product }) => {
   };
 
   const handleAddToCart = () => {
-    const token = localStorage.getItem("token");
-    if (!token) {
+    if (!user) {
       toast.error("Login first to use cart");
       return;
     }

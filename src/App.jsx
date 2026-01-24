@@ -24,6 +24,7 @@ import Admin from "./pages/admin/Admin";
 
 import { ToastContainer } from "react-toastify";
 import { UserProvider } from "./context/UserContext";
+import { AdminAuthProvider } from "./context/AdminAuthContext";
 
 const AppShell = () => {
   const location = useLocation();
@@ -88,8 +89,10 @@ const App = () => {
   return (
     <BrowserRouter>
       <UserProvider>
-        <AppShell />
-        <ToastContainer />
+        <AdminAuthProvider>
+          <AppShell />
+          <ToastContainer />
+        </AdminAuthProvider>
       </UserProvider>
     </BrowserRouter>
   );

@@ -3,7 +3,6 @@ import AdminDetails from "./SubPart/AdminDetails";
 import { useEffect, useState } from "react";
 import LoadingBox from "../../../Loading/LoadingBox";
 import api from "../../../../api/axios";
-import authApi from "../../../../api/authApi";
 import { toast } from "react-toastify";
 
 const AdminSetting = () => {
@@ -49,7 +48,7 @@ const AdminSetting = () => {
         role: formData.role,
       };
 
-      const res = await authApi.post("/admin/register", payload);
+      const res = await api.post("/admin/register", payload);
 
       setAllAdmin((prev) => [res.data.admin, ...prev]);
       toast.success("Admin created successfully");

@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../context/UserContext";
 
 const User = () => {
-  const name = localStorage.getItem("name") || "User";
+  const { user } = useUser();
+  if (!user) return null;
   const navigate = useNavigate();
 
   return (
@@ -11,7 +13,7 @@ const User = () => {
         title="User"
         className="text-white font-bold cursor-pointer hover:underline"
       >
-        Hello, {name}!
+        Hello, {user.name?.firstName || "User"}!
       </span>
     </div>
   );
