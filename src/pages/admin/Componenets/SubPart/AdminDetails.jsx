@@ -11,7 +11,8 @@ const AdminDetails = ({ admin, onDelete, disableDelete }) => {
       toast.success(`${admin.role} ${admin.name.firstName} delted Successfuly`);
       onDelete(admin._id);
     } catch (err) {
-      toast.error(err);
+      const message = err.response?.data?.message || err.response?.data?.error || "Failed to delete admin";
+      toast.error(message);
     }
   };
 
